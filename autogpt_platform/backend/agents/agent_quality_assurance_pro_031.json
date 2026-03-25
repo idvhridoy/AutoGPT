@@ -1,0 +1,275 @@
+{
+  "id": "quality-assurance-pro-031",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Quality Assurance & Testing Agent",
+  "description": "Comprehensive QA agent that automates test creation, performs quality checks, manages test suites, and ensures software quality",
+  "instructions": "You are an expert QA engineer with deep knowledge in software testing, test automation, quality assurance methodologies, and testing frameworks. You will: 1) Design comprehensive test strategies and test plans 2) Generate automated test scripts for various testing types 3) Perform regression, integration, and performance testing 4) Identify and document bugs with detailed reports 5) Monitor code quality metrics and coverage 6) Implement continuous testing in CI/CD pipelines 7) Provide quality improvement recommendations. Always follow testing best practices and ensure thorough coverage of critical functionality.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "qa-input-031",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Testing Requirements",
+        "value": "Specify application, testing type, or upload code for testing"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-031-1",
+          "source_id": "qa-input-031",
+          "sink_id": "test-planner-031",
+          "source_name": "result",
+          "sink_name": "testing_requirements",
+          "is_static": true
+        }
+      ],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "test-planner-031",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "test_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-031-1",
+          "source_id": "qa-input-031",
+          "sink_id": "test-planner-031",
+          "source_name": "result",
+          "sink_name": "testing_requirements",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-031-2",
+          "source_id": "test-planner-031",
+          "sink_id": "test-generator-031",
+          "source_name": "result",
+          "sink_name": "test_plan",
+          "is_static": true
+        },
+        {
+          "id": "link-031-3",
+          "source_id": "test-planner-031",
+          "sink_id": "coverage-analyzer-031",
+          "source_name": "result",
+          "sink_name": "test_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "test-generator-031",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "test_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-031-2",
+          "source_id": "test-planner-031",
+          "sink_id": "test-generator-031",
+          "source_name": "result",
+          "sink_name": "test_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-031-4",
+          "source_id": "test-generator-031",
+          "sink_id": "test-executor-031",
+          "source_name": "result",
+          "sink_name": "test_cases",
+          "is_static": true
+        }
+      ],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "coverage-analyzer-031",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "coverage_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-031-3",
+          "source_id": "test-planner-031",
+          "sink_id": "coverage-analyzer-031",
+          "source_name": "result",
+          "sink_name": "test_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-031-5",
+          "source_id": "coverage-analyzer-031",
+          "sink_id": "test-executor-031",
+          "source_name": "result",
+          "sink_name": "coverage_metrics",
+          "is_static": true
+        }
+      ],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "test-executor-031",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Test Execution",
+        "value": "Execute tests and collect results"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-031-4",
+          "source_id": "test-generator-031",
+          "sink_id": "test-executor-031",
+          "source_name": "result",
+          "sink_name": "test_cases",
+          "is_static": true
+        },
+        {
+          "id": "link-031-5",
+          "source_id": "coverage-analyzer-031",
+          "sink_id": "test-executor-031",
+          "source_name": "result",
+          "sink_name": "coverage_metrics",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-031-6",
+          "source_id": "test-executor-031",
+          "sink_id": "bug-tracker-031",
+          "source_name": "result",
+          "sink_name": "test_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "bug-tracker-031",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "bug_tracking"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-031-6",
+          "source_id": "test-executor-031",
+          "sink_id": "bug-tracker-031",
+          "source_name": "result",
+          "sink_name": "test_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-031-7",
+          "source_id": "bug-tracker-031",
+          "sink_id": "report-generator-031",
+          "source_name": "result",
+          "sink_name": "bug_reports",
+          "is_static": true
+        }
+      ],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-031",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "QA Report",
+        "value": "Generate comprehensive quality assurance report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-031-7",
+          "source_id": "bug-tracker-031",
+          "sink_id": "report-generator-031",
+          "source_name": "result",
+          "sink_name": "bug_reports",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "quality-assurance-pro-031",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

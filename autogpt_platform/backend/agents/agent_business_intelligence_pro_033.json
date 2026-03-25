@@ -1,0 +1,275 @@
+{
+  "id": "business-intelligence-pro-033",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Business Intelligence Agent",
+  "description": "Comprehensive BI agent that analyzes business data, creates dashboards, generates insights, and supports data-driven decision making",
+  "instructions": "You are an expert business intelligence analyst with deep knowledge in data analytics, KPI development, dashboard design, and business strategy. You will: 1) Analyze business performance metrics and trends 2) Design and create interactive dashboards 3) Identify key performance indicators (KPIs) 4) Generate business insights and recommendations 5) Perform competitor analysis and benchmarking 6) Create data visualizations and reports 7. Support strategic decision-making with data-driven insights. Always focus on actionable insights that drive business growth and efficiency.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "bi-input-033",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Business Data",
+        "value": "Upload sales data, metrics, or specify analysis requirements"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-033-1",
+          "source_id": "bi-input-033",
+          "sink_id": "data-integrator-033",
+          "source_name": "result",
+          "sink_name": "business_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "data-integrator-033",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "data_integration"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-033-1",
+          "source_id": "bi-input-033",
+          "sink_id": "data-integrator-033",
+          "source_name": "result",
+          "sink_name": "business_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-033-2",
+          "source_id": "data-integrator-033",
+          "sink_id": "kpi-analyzer-033",
+          "source_name": "result",
+          "sink_name": "integrated_data",
+          "is_static": true
+        },
+        {
+          "id": "link-033-3",
+          "source_id": "data-integrator-033",
+          "sink_id": "trend-analyzer-033",
+          "source_name": "result",
+          "sink_name": "integrated_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "kpi-analyzer-033",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "kpi_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-033-2",
+          "source_id": "data-integrator-033",
+          "sink_id": "kpi-analyzer-033",
+          "source_name": "result",
+          "sink_name": "integrated_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-033-4",
+          "source_id": "kpi-analyzer-033",
+          "sink_id": "dashboard-designer-033",
+          "source_name": "result",
+          "sink_name": "kpi_metrics",
+          "is_static": true
+        }
+      ],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "trend-analyzer-033",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "trend_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-033-3",
+          "source_id": "data-integrator-033",
+          "sink_id": "trend-analyzer-033",
+          "source_name": "result",
+          "sink_name": "integrated_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-033-5",
+          "source_id": "trend-analyzer-033",
+          "sink_id": "dashboard-designer-033",
+          "source_name": "result",
+          "sink_name": "trend_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "dashboard-designer-033",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Dashboard Design",
+        "value": "Create interactive BI dashboards and visualizations"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-033-4",
+          "source_id": "kpi-analyzer-033",
+          "sink_id": "dashboard-designer-033",
+          "source_name": "result",
+          "sink_name": "kpi_metrics",
+          "is_static": true
+        },
+        {
+          "id": "link-033-5",
+          "source_id": "trend-analyzer-033",
+          "sink_id": "dashboard-designer-033",
+          "source_name": "result",
+          "sink_name": "trend_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-033-6",
+          "source_id": "dashboard-designer-033",
+          "sink_id": "insight-generator-033",
+          "source_name": "result",
+          "sink_name": "dashboard_config",
+          "is_static": true
+        }
+      ],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "insight-generator-033",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "business_insight_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-033-6",
+          "source_id": "dashboard-designer-033",
+          "sink_id": "insight-generator-033",
+          "source_name": "result",
+          "sink_name": "dashboard_config",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-033-7",
+          "source_id": "insight-generator-033",
+          "sink_id": "report-generator-033",
+          "source_name": "result",
+          "sink_name": "business_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-033",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "BI Report",
+        "value": "Generate comprehensive business intelligence report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-033-7",
+          "source_id": "insight-generator-033",
+          "sink_id": "report-generator-033",
+          "source_name": "result",
+          "sink_name": "business_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "business-intelligence-pro-033",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "id": "event-planning-pro-035",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Event Planning Agent",
+  "description": "Comprehensive event planning agent that manages venue selection, vendor coordination, budget tracking, and event logistics",
+  "instructions": "You are an expert event planner with deep knowledge in event management, vendor coordination, budget planning, and guest experience. You will: 1) Plan comprehensive event timelines and checklists 2) Recommend venues and vendors based on requirements 3) Manage event budgets and cost optimization 4) Coordinate guest lists and invitations 5) Design event themes and decorations 6) Create contingency plans for potential issues 7) Generate post-event analysis and reports. Always focus on creating memorable, well-executed events that meet client expectations and stay within budget.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "event-input-035",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Event Details",
+        "value": "Specify event type, date, guest count, budget, and requirements"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-035-1",
+          "source_id": "event-input-035",
+          "sink_id": "requirement-analyzer-035",
+          "source_name": "result",
+          "sink_name": "event_details",
+          "is_static": true
+        }
+      ],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "requirement-analyzer-035",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "event_requirement_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-035-1",
+          "source_id": "event-input-035",
+          "sink_id": "requirement-analyzer-035",
+          "source_name": "result",
+          "sink_name": "event_details",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-035-2",
+          "source_id": "requirement-analyzer-035",
+          "sink_id": "venue-selector-035",
+          "source_name": "result",
+          "sink_name": "event_requirements",
+          "is_static": true
+        },
+        {
+          "id": "link-035-3",
+          "source_id": "requirement-analyzer-035",
+          "sink_id": "budget-planner-035",
+          "source_name": "result",
+          "sink_name": "event_requirements",
+          "is_static": true
+        }
+      ],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "venue-selector-035",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "venue_selection"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-035-2",
+          "source_id": "requirement-analyzer-035",
+          "sink_id": "venue-selector-035",
+          "source_name": "result",
+          "sink_name": "event_requirements",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-035-4",
+          "source_id": "venue-selector-035",
+          "sink_id": "vendor-coordinator-035",
+          "source_name": "result",
+          "sink_name": "venue_options",
+          "is_static": true
+        }
+      ],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "budget-planner-035",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "budget_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-035-3",
+          "source_id": "requirement-analyzer-035",
+          "sink_id": "budget-planner-035",
+          "source_name": "result",
+          "sink_name": "event_requirements",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-035-5",
+          "source_id": "budget-planner-035",
+          "sink_id": "vendor-coordinator-035",
+          "source_name": "result",
+          "sink_name": "budget_allocation",
+          "is_static": true
+        }
+      ],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "vendor-coordinator-035",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Vendor Coordination",
+        "value": "Coordinate vendors and service providers"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-035-4",
+          "source_id": "venue-selector-035",
+          "sink_id": "vendor-coordinator-035",
+          "source_name": "result",
+          "sink_name": "venue_options",
+          "is_static": true
+        },
+        {
+          "id": "link-035-5",
+          "source_id": "budget-planner-035",
+          "sink_id": "vendor-coordinator-035",
+          "source_name": "result",
+          "sink_name": "budget_allocation",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-035-6",
+          "source_id": "vendor-coordinator-035",
+          "sink_id": "timeline-manager-035",
+          "source_name": "result",
+          "sink_name": "vendor_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "timeline-manager-035",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "timeline_management"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-035-6",
+          "source_id": "vendor-coordinator-035",
+          "sink_id": "timeline-manager-035",
+          "source_name": "result",
+          "sink_name": "vendor_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-035-7",
+          "source_id": "timeline-manager-035",
+          "sink_id": "report-generator-035",
+          "source_name": "result",
+          "sink_name": "event_timeline",
+          "is_static": true
+        }
+      ],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-035",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Event Plan Report",
+        "value": "Generate comprehensive event planning report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-035-7",
+          "source_id": "timeline-manager-035",
+          "sink_id": "report-generator-035",
+          "source_name": "result",
+          "sink_name": "event_timeline",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "event-planning-pro-035",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

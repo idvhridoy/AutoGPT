@@ -1,0 +1,275 @@
+{
+  "id": "video-production-pro-034",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Video Production & Editing Agent",
+  "description": "Advanced video production agent that assists with video editing, content creation, post-production, and video optimization",
+  "instructions": "You are an expert video producer and editor with deep knowledge in video production, editing techniques, visual effects, and content creation. You will: 1) Plan video shoots and storyboards 2) Suggest editing techniques and transitions 3) Optimize video for different platforms and formats 4) Generate subtitles and captions 5) Recommend music and sound effects 6) Create video thumbnails and promotional materials 7) Analyze video performance and engagement. Always focus on creating engaging, high-quality video content that resonates with the target audience.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "video-input-034",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Video Project",
+        "value": "Describe video concept, upload footage, or specify editing needs"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-034-1",
+          "source_id": "video-input-034",
+          "sink_id": "content-planner-034",
+          "source_name": "result",
+          "sink_name": "video_project",
+          "is_static": true
+        }
+      ],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "content-planner-034",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "video_content_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-034-1",
+          "source_id": "video-input-034",
+          "sink_id": "content-planner-034",
+          "source_name": "result",
+          "sink_name": "video_project",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-034-2",
+          "source_id": "content-planner-034",
+          "sink_id": "editing-advisor-034",
+          "source_name": "result",
+          "sink_name": "video_plan",
+          "is_static": true
+        },
+        {
+          "id": "link-034-3",
+          "source_id": "content-planner-034",
+          "sink_id": "post-processor-034",
+          "source_name": "result",
+          "sink_name": "video_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "editing-advisor-034",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "video_editing_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-034-2",
+          "source_id": "content-planner-034",
+          "sink_id": "editing-advisor-034",
+          "source_name": "result",
+          "sink_name": "video_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-034-4",
+          "source_id": "editing-advisor-034",
+          "sink_id": "optimizer-034",
+          "source_name": "result",
+          "sink_name": "editing_strategy",
+          "is_static": true
+        }
+      ],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "post-processor-034",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "post_processing"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-034-3",
+          "source_id": "content-planner-034",
+          "sink_id": "post-processor-034",
+          "source_name": "result",
+          "sink_name": "video_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-034-5",
+          "source_id": "post-processor-034",
+          "sink_id": "optimizer-034",
+          "source_name": "result",
+          "sink_name": "post_effects",
+          "is_static": true
+        }
+      ],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "optimizer-034",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Video Optimization",
+        "value": "Optimize video for platforms and performance"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-034-4",
+          "source_id": "editing-advisor-034",
+          "sink_id": "optimizer-034",
+          "source_name": "result",
+          "sink_name": "editing_strategy",
+          "is_static": true
+        },
+        {
+          "id": "link-034-5",
+          "source_id": "post-processor-034",
+          "sink_id": "optimizer-034",
+          "source_name": "result",
+          "sink_name": "post_effects",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-034-6",
+          "source_id": "optimizer-034",
+          "sink_id": "thumbnail-creator-034",
+          "source_name": "result",
+          "sink_name": "optimized_video",
+          "is_static": true
+        }
+      ],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "thumbnail-creator-034",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "thumbnail_creation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-034-6",
+          "source_id": "optimizer-034",
+          "sink_id": "thumbnail-creator-034",
+          "source_name": "result",
+          "sink_name": "optimized_video",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-034-7",
+          "source_id": "thumbnail-creator-034",
+          "sink_id": "report-generator-034",
+          "source_name": "result",
+          "sink_name": "video_assets",
+          "is_static": true
+        }
+      ],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-034",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Video Production Report",
+        "value": "Generate comprehensive video production summary"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-034-7",
+          "source_id": "thumbnail-creator-034",
+          "sink_id": "report-generator-034",
+          "source_name": "result",
+          "sink_name": "video_assets",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "video-production-pro-034",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

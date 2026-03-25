@@ -1,0 +1,275 @@
+{
+  "id": "knowledge-management-pro-032",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Knowledge Management Agent",
+  "description": "Advanced knowledge management agent that organizes information, creates knowledge bases, extracts insights, and facilitates knowledge sharing",
+  "instructions": "You are an expert knowledge manager with deep knowledge in information architecture, knowledge organization, content management, and corporate knowledge systems. You will: 1) Organize and categorize information into structured knowledge bases 2) Extract key insights and create knowledge summaries 3) Design taxonomies and ontologies for better information access 4) Implement search and retrieval systems 5) Identify knowledge gaps and duplication 6) Facilitate knowledge transfer and sharing 7) Create learning paths and training materials. Always focus on making knowledge accessible, discoverable, and actionable.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "knowledge-input-032",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Knowledge Content",
+        "value": "Upload documents, specify knowledge domain, or describe organization needs"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-032-1",
+          "source_id": "knowledge-input-032",
+          "sink_id": "content-processor-032",
+          "source_name": "result",
+          "sink_name": "knowledge_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "content-processor-032",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "content_processing"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-032-1",
+          "source_id": "knowledge-input-032",
+          "sink_id": "content-processor-032",
+          "source_name": "result",
+          "sink_name": "knowledge_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-032-2",
+          "source_id": "content-processor-032",
+          "sink_id": "taxonomy-designer-032",
+          "source_name": "result",
+          "sink_name": "processed_content",
+          "is_static": true
+        },
+        {
+          "id": "link-032-3",
+          "source_id": "content-processor-032",
+          "sink_id": "insight-extractor-032",
+          "source_name": "result",
+          "sink_name": "processed_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "taxonomy-designer-032",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "taxonomy_design"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-032-2",
+          "source_id": "content-processor-032",
+          "sink_id": "taxonomy-designer-032",
+          "source_name": "result",
+          "sink_name": "processed_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-032-4",
+          "source_id": "taxonomy-designer-032",
+          "sink_id": "knowledge-organizer-032",
+          "source_name": "result",
+          "sink_name": "taxonomy_structure",
+          "is_static": true
+        }
+      ],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "insight-extractor-032",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "insight_extraction"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-032-3",
+          "source_id": "content-processor-032",
+          "sink_id": "insight-extractor-032",
+          "source_name": "result",
+          "sink_name": "processed_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-032-5",
+          "source_id": "insight-extractor-032",
+          "sink_id": "knowledge-organizer-032",
+          "source_name": "result",
+          "sink_name": "key_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "knowledge-organizer-032",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Knowledge Organization",
+        "value": "Organize knowledge into structured knowledge base"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-032-4",
+          "source_id": "taxonomy-designer-032",
+          "sink_id": "knowledge-organizer-032",
+          "source_name": "result",
+          "sink_name": "taxonomy_structure",
+          "is_static": true
+        },
+        {
+          "id": "link-032-5",
+          "source_id": "insight-extractor-032",
+          "sink_id": "knowledge-organizer-032",
+          "source_name": "result",
+          "sink_name": "key_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-032-6",
+          "source_id": "knowledge-organizer-032",
+          "sink_id": "search-optimizer-032",
+          "source_name": "result",
+          "sink_name": "knowledge_base",
+          "is_static": true
+        }
+      ],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "search-optimizer-032",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "search_optimization"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-032-6",
+          "source_id": "knowledge-organizer-032",
+          "sink_id": "search-optimizer-032",
+          "source_name": "result",
+          "sink_name": "knowledge_base",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-032-7",
+          "source_id": "search-optimizer-032",
+          "sink_id": "report-generator-032",
+          "source_name": "result",
+          "sink_name": "search_system",
+          "is_static": true
+        }
+      ],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-032",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Knowledge Report",
+        "value": "Generate knowledge management summary and recommendations"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-032-7",
+          "source_id": "search-optimizer-032",
+          "sink_id": "report-generator-032",
+          "source_name": "result",
+          "sink_name": "search_system",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "knowledge-management-pro-032",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}
