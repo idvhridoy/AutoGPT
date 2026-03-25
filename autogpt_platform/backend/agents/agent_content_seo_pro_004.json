@@ -1,0 +1,291 @@
+{
+  "id": "content-seo-pro-004",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Content Creation & SEO Optimization Agent",
+  "description": "Advanced content creation agent that generates high-quality, SEO-optimized content including blog posts, articles, social media content, and marketing copy",
+  "instructions": "You are an expert content creator and SEO specialist with deep knowledge in digital marketing, copywriting, and search engine optimization. When given a topic or content request, you will: 1) Research the topic thoroughly 2) Identify target keywords and search intent 3) Create engaging, well-structured content 4) Optimize for SEO with proper headings, meta descriptions, and keyword density 5) Ensure readability and user engagement 6) Generate variations for different platforms (blog, social media, email) 7) Provide content performance metrics and recommendations. Always follow E-E-A-T guidelines (Experience, Expertise, Authoritativeness, Trustworthiness).",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "content-input-004",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Content Request",
+        "value": "Specify topic, target audience, and content type"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-004-1",
+          "source_id": "content-input-004",
+          "sink_id": "keyword-researcher-004",
+          "source_name": "result",
+          "sink_name": "content_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "keyword-researcher-004",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "keyword_research"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004-1",
+          "source_id": "content-input-004",
+          "sink_id": "keyword-researcher-004",
+          "source_name": "result",
+          "sink_name": "content_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-004-2",
+          "source_id": "keyword-researcher-004",
+          "sink_id": "content-generator-004",
+          "source_name": "result",
+          "sink_name": "keywords",
+          "is_static": true
+        },
+        {
+          "id": "link-004-3",
+          "source_id": "keyword-researcher-004",
+          "sink_id": "seo-optimizer-004",
+          "source_name": "result",
+          "sink_name": "keywords",
+          "is_static": true
+        }
+      ],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "content-generator-004",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "content_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004-2",
+          "source_id": "keyword-researcher-004",
+          "sink_id": "content-generator-004",
+          "source_name": "result",
+          "sink_name": "keywords",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-004-4",
+          "source_id": "content-generator-004",
+          "sink_id": "seo-optimizer-004",
+          "source_name": "result",
+          "sink_name": "generated_content",
+          "is_static": true
+        },
+        {
+          "id": "link-004-5",
+          "source_id": "content-generator-004",
+          "sink_id": "multi-format-004",
+          "source_name": "result",
+          "sink_name": "generated_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "seo-optimizer-004",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "SEO Optimization",
+        "value": "Optimize content for search engines"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004-3",
+          "source_id": "keyword-researcher-004",
+          "sink_id": "seo-optimizer-004",
+          "source_name": "result",
+          "sink_name": "keywords",
+          "is_static": true
+        },
+        {
+          "id": "link-004-4",
+          "source_id": "content-generator-004",
+          "sink_id": "seo-optimizer-004",
+          "source_name": "result",
+          "sink_name": "generated_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-004-6",
+          "source_id": "seo-optimizer-004",
+          "sink_id": "quality-checker-004",
+          "source_name": "result",
+          "sink_name": "optimized_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "multi-format-004",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "multi_format_adaptation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 250
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004-5",
+          "source_id": "content-generator-004",
+          "sink_id": "multi-format-004",
+          "source_name": "result",
+          "sink_name": "generated_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-004-7",
+          "source_id": "multi-format-004",
+          "sink_id": "quality-checker-004",
+          "source_name": "result",
+          "sink_name": "formatted_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "quality-checker-004",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Quality Check",
+        "value": "Review and enhance content quality"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 175
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004-6",
+          "source_id": "seo-optimizer-004",
+          "sink_id": "quality-checker-004",
+          "source_name": "result",
+          "sink_name": "optimized_content",
+          "is_static": true
+        },
+        {
+          "id": "link-004-7",
+          "source_id": "multi-format-004",
+          "sink_id": "quality-checker-004",
+          "source_name": "result",
+          "sink_name": "formatted_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-004-8",
+          "source_id": "quality-checker-004",
+          "sink_id": "final-deliverable-004",
+          "source_name": "result",
+          "sink_name": "final_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "final-deliverable-004",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Final Deliverable",
+        "value": "Package all content variants and analytics"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 175
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004-8",
+          "source_id": "quality-checker-004",
+          "sink_id": "final-deliverable-004",
+          "source_name": "result",
+          "sink_name": "final_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "content-seo-pro-004",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

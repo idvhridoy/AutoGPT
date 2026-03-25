@@ -1,0 +1,275 @@
+{
+  "id": "code-review-pro-002",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Code Review & Optimization Agent",
+  "description": "Advanced code analysis agent that performs comprehensive code reviews, identifies bugs, suggests optimizations, and refactors code for better performance and maintainability",
+  "instructions": "You are an expert software engineer and code reviewer with deep knowledge across multiple programming languages, design patterns, and best practices. When given code, you will: 1) Analyze code quality and identify potential bugs 2) Check for security vulnerabilities 3) Suggest performance optimizations 4) Recommend design pattern improvements 5) Refactor code for better readability and maintainability 6) Generate detailed review comments with specific line-by-line suggestions 7) Provide refactored code examples when beneficial. Always be constructive and explain the reasoning behind your suggestions.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "code-input-002",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Code Input",
+        "value": "Paste or upload your code for review"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-002-1",
+          "source_id": "code-input-002",
+          "sink_id": "syntax-analyzer-002",
+          "source_name": "result",
+          "sink_name": "code",
+          "is_static": true
+        }
+      ],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "syntax-analyzer-002",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "syntax_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002-1",
+          "source_id": "code-input-002",
+          "sink_id": "syntax-analyzer-002",
+          "source_name": "result",
+          "sink_name": "code",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-002-2",
+          "source_id": "syntax-analyzer-002",
+          "sink_id": "security-scanner-002",
+          "source_name": "result",
+          "sink_name": "parsed_code",
+          "is_static": true
+        },
+        {
+          "id": "link-002-3",
+          "source_id": "syntax-analyzer-002",
+          "sink_id": "performance-analyzer-002",
+          "source_name": "result",
+          "sink_name": "parsed_code",
+          "is_static": true
+        }
+      ],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "security-scanner-002",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "security_vulnerability_scan"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002-2",
+          "source_id": "syntax-analyzer-002",
+          "sink_id": "security-scanner-002",
+          "source_name": "result",
+          "sink_name": "parsed_code",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-002-4",
+          "source_id": "security-scanner-002",
+          "sink_id": "review-generator-002",
+          "source_name": "result",
+          "sink_name": "security_issues",
+          "is_static": true
+        }
+      ],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "performance-analyzer-002",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "performance_optimization_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002-3",
+          "source_id": "syntax-analyzer-002",
+          "sink_id": "performance-analyzer-002",
+          "source_name": "result",
+          "sink_name": "parsed_code",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-002-5",
+          "source_id": "performance-analyzer-002",
+          "sink_id": "review-generator-002",
+          "source_name": "result",
+          "sink_name": "performance_issues",
+          "is_static": true
+        }
+      ],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "review-generator-002",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Review Generation",
+        "value": "Generate comprehensive code review"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002-4",
+          "source_id": "security-scanner-002",
+          "sink_id": "review-generator-002",
+          "source_name": "result",
+          "sink_name": "security_issues",
+          "is_static": true
+        },
+        {
+          "id": "link-002-5",
+          "source_id": "performance-analyzer-002",
+          "sink_id": "review-generator-002",
+          "source_name": "result",
+          "sink_name": "performance_issues",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-002-6",
+          "source_id": "review-generator-002",
+          "sink_id": "refactor-suggester-002",
+          "source_name": "result",
+          "sink_name": "review_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "refactor-suggester-002",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "refactoring_suggestions"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002-6",
+          "source_id": "review-generator-002",
+          "sink_id": "refactor-suggester-002",
+          "source_name": "result",
+          "sink_name": "review_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-002-7",
+          "source_id": "refactor-suggester-002",
+          "sink_id": "final-report-002",
+          "source_name": "result",
+          "sink_name": "refactored_code",
+          "is_static": true
+        }
+      ],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "final-report-002",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Final Report",
+        "value": "Generate final review report with recommendations"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002-7",
+          "source_id": "refactor-suggester-002",
+          "sink_id": "final-report-002",
+          "source_name": "result",
+          "sink_name": "refactored_code",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "code-review-pro-002",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

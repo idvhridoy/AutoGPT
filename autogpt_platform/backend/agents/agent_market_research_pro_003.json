@@ -1,0 +1,275 @@
+{
+  "id": "market-research-pro-003",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Market Research & Trend Analysis Agent",
+  "description": "Comprehensive market research agent that analyzes industry trends, competitor strategies, market opportunities, and provides actionable business intelligence",
+  "instructions": "You are an expert market analyst with deep knowledge in business intelligence, competitive analysis, and trend forecasting. When given a market or industry, you will: 1) Research current market size and growth projections 2) Analyze key competitors and their strategies 3) Identify emerging trends and technologies 4) Assess market opportunities and threats 5) Provide SWOT analysis 6) Generate actionable recommendations 7) Create comprehensive market reports with data visualizations. Always cite sources and validate information from multiple reliable sources.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "market-input-003",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Market/Industry",
+        "value": "Specify market, industry, or company to research"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-003-1",
+          "source_id": "market-input-003",
+          "sink_id": "data-collector-003",
+          "source_name": "result",
+          "sink_name": "market_query",
+          "is_static": true
+        }
+      ],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "data-collector-003",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "market_data_collection"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003-1",
+          "source_id": "market-input-003",
+          "sink_id": "data-collector-003",
+          "source_name": "result",
+          "sink_name": "market_query",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-003-2",
+          "source_id": "data-collector-003",
+          "sink_id": "competitor-analyzer-003",
+          "source_name": "result",
+          "sink_name": "market_data",
+          "is_static": true
+        },
+        {
+          "id": "link-003-3",
+          "source_id": "data-collector-003",
+          "sink_id": "trend-analyzer-003",
+          "source_name": "result",
+          "sink_name": "market_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "competitor-analyzer-003",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "competitor_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003-2",
+          "source_id": "data-collector-003",
+          "sink_id": "competitor-analyzer-003",
+          "source_name": "result",
+          "sink_name": "market_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-003-4",
+          "source_id": "competitor-analyzer-003",
+          "sink_id": "swot-analyzer-003",
+          "source_name": "result",
+          "sink_name": "competitor_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "trend-analyzer-003",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "trend_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003-3",
+          "source_id": "data-collector-003",
+          "sink_id": "trend-analyzer-003",
+          "source_name": "result",
+          "sink_name": "market_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-003-5",
+          "source_id": "trend-analyzer-003",
+          "sink_id": "swot-analyzer-003",
+          "source_name": "result",
+          "sink_name": "trend_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "swot-analyzer-003",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "SWOT Analysis",
+        "value": "Perform SWOT analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003-4",
+          "source_id": "competitor-analyzer-003",
+          "sink_id": "swot-analyzer-003",
+          "source_name": "result",
+          "sink_name": "competitor_data",
+          "is_static": true
+        },
+        {
+          "id": "link-003-5",
+          "source_id": "trend-analyzer-003",
+          "sink_id": "swot-analyzer-003",
+          "source_name": "result",
+          "sink_name": "trend_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-003-6",
+          "source_id": "swot-analyzer-003",
+          "sink_id": "opportunity-finder-003",
+          "source_name": "result",
+          "sink_name": "swot_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "opportunity-finder-003",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "opportunity_identification"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003-6",
+          "source_id": "swot-analyzer-003",
+          "sink_id": "opportunity-finder-003",
+          "source_name": "result",
+          "sink_name": "swot_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-003-7",
+          "source_id": "opportunity-finder-003",
+          "sink_id": "report-generator-003",
+          "source_name": "result",
+          "sink_name": "opportunities",
+          "is_static": true
+        }
+      ],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-003",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Market Report",
+        "value": "Generate comprehensive market research report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003-7",
+          "source_id": "opportunity-finder-003",
+          "sink_id": "report-generator-003",
+          "source_name": "result",
+          "sink_name": "opportunities",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "market-research-pro-003",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

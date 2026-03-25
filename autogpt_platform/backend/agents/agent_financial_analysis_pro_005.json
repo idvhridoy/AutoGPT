@@ -1,0 +1,275 @@
+{
+  "id": "financial-analysis-pro-005",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Financial Analysis & Trading Strategy Agent",
+  "description": "Advanced financial analysis agent that performs technical analysis, fundamental analysis, risk assessment, and generates trading strategies for stocks, crypto, and other assets",
+  "instructions": "You are an expert financial analyst and quantitative trader with deep knowledge in technical analysis, fundamental analysis, risk management, and algorithmic trading. When given financial assets or markets, you will: 1) Perform comprehensive technical analysis with indicators and patterns 2) Conduct fundamental analysis of financial statements and metrics 3) Assess market sentiment and news impact 4) Calculate risk metrics and position sizing 5) Develop trading strategies with entry/exit points 6) Provide portfolio optimization recommendations 7) Generate detailed analysis reports with risk warnings. Always emphasize that all investments carry risk and past performance doesn't guarantee future results.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "financial-input-005",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Asset/Market",
+        "value": "Enter stock symbol, crypto pair, or market to analyze"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-005-1",
+          "source_id": "financial-input-005",
+          "sink_id": "market-data-005",
+          "source_name": "result",
+          "sink_name": "asset_symbol",
+          "is_static": true
+        }
+      ],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "market-data-005",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "market_data_collection"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005-1",
+          "source_id": "financial-input-005",
+          "sink_id": "market-data-005",
+          "source_name": "result",
+          "sink_name": "asset_symbol",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-005-2",
+          "source_id": "market-data-005",
+          "sink_id": "technical-analyzer-005",
+          "source_name": "result",
+          "sink_name": "price_data",
+          "is_static": true
+        },
+        {
+          "id": "link-005-3",
+          "source_id": "market-data-005",
+          "sink_id": "fundamental-analyzer-005",
+          "source_name": "result",
+          "sink_name": "financial_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "technical-analyzer-005",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "technical_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005-2",
+          "source_id": "market-data-005",
+          "sink_id": "technical-analyzer-005",
+          "source_name": "result",
+          "sink_name": "price_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-005-4",
+          "source_id": "technical-analyzer-005",
+          "sink_id": "risk-assessor-005",
+          "source_name": "result",
+          "sink_name": "technical_signals",
+          "is_static": true
+        }
+      ],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "fundamental-analyzer-005",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "fundamental_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005-3",
+          "source_id": "market-data-005",
+          "sink_id": "fundamental-analyzer-005",
+          "source_name": "result",
+          "sink_name": "financial_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-005-5",
+          "source_id": "fundamental-analyzer-005",
+          "sink_id": "risk-assessor-005",
+          "source_name": "result",
+          "sink_name": "fundamental_metrics",
+          "is_static": true
+        }
+      ],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "risk-assessor-005",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Risk Assessment",
+        "value": "Calculate risk metrics and assess exposure"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005-4",
+          "source_id": "technical-analyzer-005",
+          "sink_id": "risk-assessor-005",
+          "source_name": "result",
+          "sink_name": "technical_signals",
+          "is_static": true
+        },
+        {
+          "id": "link-005-5",
+          "source_id": "fundamental-analyzer-005",
+          "sink_id": "risk-assessor-005",
+          "source_name": "result",
+          "sink_name": "fundamental_metrics",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-005-6",
+          "source_id": "risk-assessor-005",
+          "sink_id": "strategy-generator-005",
+          "source_name": "result",
+          "sink_name": "risk_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "strategy-generator-005",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "trading_strategy_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005-6",
+          "source_id": "risk-assessor-005",
+          "sink_id": "strategy-generator-005",
+          "source_name": "result",
+          "sink_name": "risk_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-005-7",
+          "source_id": "strategy-generator-005",
+          "sink_id": "portfolio-optimizer-005",
+          "source_name": "result",
+          "sink_name": "trading_strategies",
+          "is_static": true
+        }
+      ],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "portfolio-optimizer-005",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Portfolio Optimization",
+        "value": "Optimize portfolio allocation and generate report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005-7",
+          "source_id": "strategy-generator-005",
+          "sink_id": "portfolio-optimizer-005",
+          "source_name": "result",
+          "sink_name": "trading_strategies",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "financial-analysis-pro-005",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

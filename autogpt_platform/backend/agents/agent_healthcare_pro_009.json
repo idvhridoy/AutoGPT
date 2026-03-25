@@ -1,0 +1,275 @@
+{
+  "id": "healthcare-pro-009",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Healthcare & Medical Diagnosis Assistant",
+  "description": "Advanced medical AI agent that assists with symptom analysis, preliminary diagnosis suggestions, treatment recommendations, and healthcare information",
+  "instructions": "You are an AI medical assistant with extensive knowledge in medical conditions, symptoms, treatments, and healthcare protocols. IMPORTANT: You are NOT a substitute for professional medical advice. Always include a disclaimer that users should consult healthcare professionals. You will: 1) Analyze symptoms and medical history 2) Provide potential conditions based on symptoms (never definitive diagnosis) 3) Suggest when to seek immediate medical attention 4) Provide general health information and prevention tips 5) Help users prepare for doctor visits 6) Explain medical procedures and treatments 7) Track symptoms and medication schedules. Always prioritize user safety and direct to emergency services for serious symptoms.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "medical-input-009",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Medical Query",
+        "value": "Describe symptoms, ask health questions, or upload medical data"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-009-1",
+          "source_id": "medical-input-009",
+          "sink_id": "symptom-analyzer-009",
+          "source_name": "result",
+          "sink_name": "medical_query",
+          "is_static": true
+        }
+      ],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "symptom-analyzer-009",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "symptom_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-009-1",
+          "source_id": "medical-input-009",
+          "sink_id": "symptom-analyzer-009",
+          "source_name": "result",
+          "sink_name": "medical_query",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-009-2",
+          "source_id": "symptom-analyzer-009",
+          "sink_id": "urgency-assessor-009",
+          "source_name": "result",
+          "sink_name": "analyzed_symptoms",
+          "is_static": true
+        },
+        {
+          "id": "link-009-3",
+          "source_id": "symptom-analyzer-009",
+          "sink_id": "condition-matcher-009",
+          "source_name": "result",
+          "sink_name": "analyzed_symptoms",
+          "is_static": true
+        }
+      ],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "urgency-assessor-009",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "urgency_assessment"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-009-2",
+          "source_id": "symptom-analyzer-009",
+          "sink_id": "urgency-assessor-009",
+          "source_name": "result",
+          "sink_name": "analyzed_symptoms",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-009-4",
+          "source_id": "urgency-assessor-009",
+          "sink_id": "care-advisor-009",
+          "source_name": "result",
+          "sink_name": "urgency_level",
+          "is_static": true
+        }
+      ],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "condition-matcher-009",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "condition_matching"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-009-3",
+          "source_id": "symptom-analyzer-009",
+          "sink_id": "condition-matcher-009",
+          "source_name": "result",
+          "sink_name": "analyzed_symptoms",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-009-5",
+          "source_id": "condition-matcher-009",
+          "sink_id": "care-advisor-009",
+          "source_name": "result",
+          "sink_name": "possible_conditions",
+          "is_static": true
+        }
+      ],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "care-advisor-009",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Care Advisory",
+        "value": "Provide care recommendations with medical disclaimer"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-009-4",
+          "source_id": "urgency-assessor-009",
+          "sink_id": "care-advisor-009",
+          "source_name": "result",
+          "sink_name": "urgency_level",
+          "is_static": true
+        },
+        {
+          "id": "link-009-5",
+          "source_id": "condition-matcher-009",
+          "sink_id": "care-advisor-009",
+          "source_name": "result",
+          "sink_name": "possible_conditions",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-009-6",
+          "source_id": "care-advisor-009",
+          "sink_id": "health-tracker-009",
+          "source_name": "result",
+          "sink_name": "care_recommendations",
+          "is_static": true
+        }
+      ],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "health-tracker-009",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "health_tracking"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-009-6",
+          "source_id": "care-advisor-009",
+          "sink_id": "health-tracker-009",
+          "source_name": "result",
+          "sink_name": "care_recommendations",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-009-7",
+          "source_id": "health-tracker-009",
+          "sink_id": "report-generator-009",
+          "source_name": "result",
+          "sink_name": "health_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-009",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Health Report",
+        "value": "Generate health summary with disclaimers and next steps"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-009-7",
+          "source_id": "health-tracker-009",
+          "sink_id": "report-generator-009",
+          "source_name": "result",
+          "sink_name": "health_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "healthcare-pro-009",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

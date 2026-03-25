@@ -1,0 +1,275 @@
+{
+  "id": "data-analysis-pro-001",
+  "version": 1,
+  "is_active": true,
+  "name": "Advanced Data Analysis Agent",
+  "description": "Comprehensive data analysis agent that performs exploratory data analysis, statistical modeling, visualization, and generates insights from any dataset",
+  "instructions": "You are an expert data analyst with deep knowledge in statistics, machine learning, and data visualization. When given a dataset, you will: 1) Perform exploratory data analysis to understand data structure, patterns, and anomalies 2) Generate appropriate visualizations to reveal insights 3) Apply statistical tests and models as needed 4) Provide clear, actionable insights and recommendations 5) Create a comprehensive report with findings. Always validate your assumptions and check for data quality issues.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "input-node-001",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Dataset",
+        "value": "Upload your dataset (CSV, Excel, JSON)"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-001",
+          "source_id": "input-node-001",
+          "sink_id": "data-validator-001",
+          "source_name": "result",
+          "sink_name": "data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "data-validator-001",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "data_validation"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-001",
+          "source_id": "input-node-001",
+          "sink_id": "data-validator-001",
+          "source_name": "result",
+          "sink_name": "data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-002",
+          "source_id": "data-validator-001",
+          "sink_id": "eda-analyzer-001",
+          "source_name": "result",
+          "sink_name": "validated_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "eda-analyzer-001",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "EDA Analysis",
+        "value": "Perform exploratory data analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-002",
+          "source_id": "data-validator-001",
+          "sink_id": "eda-analyzer-001",
+          "source_name": "result",
+          "sink_name": "validated_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-003",
+          "source_id": "eda-analyzer-001",
+          "sink_id": "statistical-analyzer-001",
+          "source_name": "result",
+          "sink_name": "eda_results",
+          "is_static": true
+        },
+        {
+          "id": "link-004",
+          "source_id": "eda-analyzer-001",
+          "sink_id": "visualizer-001",
+          "source_name": "result",
+          "sink_name": "data_for_viz",
+          "is_static": true
+        }
+      ],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "statistical-analyzer-001",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "statistical_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-003",
+          "source_id": "eda-analyzer-001",
+          "sink_id": "statistical-analyzer-001",
+          "source_name": "result",
+          "sink_name": "eda_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-005",
+          "source_id": "statistical-analyzer-001",
+          "sink_id": "insight-generator-001",
+          "source_name": "result",
+          "sink_name": "stats_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "visualizer-001",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Visualization",
+        "value": "Generate data visualizations"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-004",
+          "source_id": "eda-analyzer-001",
+          "sink_id": "visualizer-001",
+          "source_name": "result",
+          "sink_name": "data_for_viz",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-006",
+          "source_id": "visualizer-001",
+          "sink_id": "insight-generator-001",
+          "source_name": "result",
+          "sink_name": "visualizations",
+          "is_static": true
+        }
+      ],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "insight-generator-001",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "insight_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-005",
+          "source_id": "statistical-analyzer-001",
+          "sink_id": "insight-generator-001",
+          "source_name": "result",
+          "sink_name": "stats_results",
+          "is_static": true
+        },
+        {
+          "id": "link-006",
+          "source_id": "visualizer-001",
+          "sink_id": "insight-generator-001",
+          "source_name": "result",
+          "sink_name": "visualizations",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-007",
+          "source_id": "insight-generator-001",
+          "sink_id": "report-generator-001",
+          "source_name": "result",
+          "sink_name": "insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-001",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Final Report",
+        "value": "Generate comprehensive analysis report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007",
+          "source_id": "insight-generator-001",
+          "sink_id": "report-generator-001",
+          "source_name": "result",
+          "sink_name": "insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "data-analysis-pro-001",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

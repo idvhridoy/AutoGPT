@@ -1,0 +1,275 @@
+{
+  "id": "project-management-pro-007",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Project Management & Task Automation Agent",
+  "description": "Intelligent project management agent that automates task scheduling, resource allocation, progress tracking, and generates comprehensive project reports",
+  "instructions": "You are an expert project manager (PMP certified) with extensive experience in agile methodologies, resource planning, and team coordination. You will: 1) Analyze project requirements and break down tasks 2) Create realistic timelines with buffer periods 3) Allocate resources efficiently based on team capacity 4) Track progress and identify bottlenecks 5) Generate daily/weekly status reports 6) Predict project delays and suggest mitigation strategies 7) Facilitate team communication and task handoffs. Always consider team workload, dependencies, and potential risks in your planning.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "project-input-007",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Project Details",
+        "value": "Enter project scope, team size, deadlines, and requirements"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-007-1",
+          "source_id": "project-input-007",
+          "sink_id": "task-breakdown-007",
+          "source_name": "result",
+          "sink_name": "project_specs",
+          "is_static": true
+        }
+      ],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "task-breakdown-007",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "task_breakdown_structure"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007-1",
+          "source_id": "project-input-007",
+          "sink_id": "task-breakdown-007",
+          "source_name": "result",
+          "sink_name": "project_specs",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-007-2",
+          "source_id": "task-breakdown-007",
+          "sink_id": "resource-planner-007",
+          "source_name": "result",
+          "sink_name": "task_list",
+          "is_static": true
+        },
+        {
+          "id": "link-007-3",
+          "source_id": "task-breakdown-007",
+          "sink_id": "dependency-mapper-007",
+          "source_name": "result",
+          "sink_name": "task_list",
+          "is_static": true
+        }
+      ],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "resource-planner-007",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "resource_allocation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007-2",
+          "source_id": "task-breakdown-007",
+          "sink_id": "resource-planner-007",
+          "source_name": "result",
+          "sink_name": "task_list",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-007-4",
+          "source_id": "resource-planner-007",
+          "sink_id": "scheduler-007",
+          "source_name": "result",
+          "sink_name": "resource_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "dependency-mapper-007",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "dependency_mapping"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007-3",
+          "source_id": "task-breakdown-007",
+          "sink_id": "dependency-mapper-007",
+          "source_name": "result",
+          "sink_name": "task_list",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-007-5",
+          "source_id": "dependency-mapper-007",
+          "sink_id": "scheduler-007",
+          "source_name": "result",
+          "sink_name": "dependencies",
+          "is_static": true
+        }
+      ],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "scheduler-007",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Task Scheduling",
+        "value": "Create optimal project timeline"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007-4",
+          "source_id": "resource-planner-007",
+          "sink_id": "scheduler-007",
+          "source_name": "result",
+          "sink_name": "resource_plan",
+          "is_static": true
+        },
+        {
+          "id": "link-007-5",
+          "source_id": "dependency-mapper-007",
+          "sink_id": "scheduler-007",
+          "source_name": "result",
+          "sink_name": "dependencies",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-007-6",
+          "source_id": "scheduler-007",
+          "sink_id": "progress-tracker-007",
+          "source_name": "result",
+          "sink_name": "project_schedule",
+          "is_static": true
+        }
+      ],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "progress-tracker-007",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "progress_tracking"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007-6",
+          "source_id": "scheduler-007",
+          "sink_id": "progress-tracker-007",
+          "source_name": "result",
+          "sink_name": "project_schedule",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-007-7",
+          "source_id": "progress-tracker-007",
+          "sink_id": "report-generator-007",
+          "source_name": "result",
+          "sink_name": "progress_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-007",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Project Reports",
+        "value": "Generate comprehensive project management reports"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-007-7",
+          "source_id": "progress-tracker-007",
+          "sink_id": "report-generator-007",
+          "source_name": "result",
+          "sink_name": "progress_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "project-management-pro-007",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

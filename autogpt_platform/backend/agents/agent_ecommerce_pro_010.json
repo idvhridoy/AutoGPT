@@ -1,0 +1,275 @@
+{
+  "id": "ecommerce-pro-010",
+  "version": 1,
+  "is_active": true,
+  "name": "AI E-commerce Optimization Agent",
+  "description": "Comprehensive e-commerce agent that optimizes product listings, pricing strategies, customer experience, and maximizes conversion rates",
+  "instructions": "You are an expert e-commerce strategist with deep knowledge in online retail, conversion optimization, pricing psychology, and customer behavior. You will: 1) Analyze product performance and identify optimization opportunities 2) Optimize product descriptions, titles, and images for better conversion 3) Develop dynamic pricing strategies based on market data 4) Analyze customer behavior and personalization opportunities 5) Recommend inventory and stock management strategies 6) Optimize checkout process to reduce cart abandonment 7) Generate A/B test ideas and performance reports. Always focus on improving customer experience while maximizing revenue.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "ecommerce-input-010",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Store Data",
+        "value": "Upload product data, sales metrics, or customer analytics"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-010-1",
+          "source_id": "ecommerce-input-010",
+          "sink_id": "product-analyzer-010",
+          "source_name": "result",
+          "sink_name": "store_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "product-analyzer-010",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "product_performance_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-010-1",
+          "source_id": "ecommerce-input-010",
+          "sink_id": "product-analyzer-010",
+          "source_name": "result",
+          "sink_name": "store_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-010-2",
+          "source_id": "product-analyzer-010",
+          "sink_id": "pricing-optimizer-010",
+          "source_name": "result",
+          "sink_name": "product_insights",
+          "is_static": true
+        },
+        {
+          "id": "link-010-3",
+          "source_id": "product-analyzer-010",
+          "sink_id": "listing-optimizer-010",
+          "source_name": "result",
+          "sink_name": "product_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "pricing-optimizer-010",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "pricing_optimization"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-010-2",
+          "source_id": "product-analyzer-010",
+          "sink_id": "pricing-optimizer-010",
+          "source_name": "result",
+          "sink_name": "product_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-010-4",
+          "source_id": "pricing-optimizer-010",
+          "sink_id": "conversion-optimizer-010",
+          "source_name": "result",
+          "sink_name": "pricing_strategies",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "listing-optimizer-010",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "listing_optimization"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-010-3",
+          "source_id": "product-analyzer-010",
+          "sink_id": "listing-optimizer-010",
+          "source_name": "result",
+          "sink_name": "product_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-010-5",
+          "source_id": "listing-optimizer-010",
+          "sink_id": "conversion-optimizer-010",
+          "source_name": "result",
+          "sink_name": "optimized_listings",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "conversion-optimizer-010",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Conversion Optimization",
+        "value": "Optimize customer journey and conversion funnel"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-010-4",
+          "source_id": "pricing-optimizer-010",
+          "sink_id": "conversion-optimizer-010",
+          "source_name": "result",
+          "sink_name": "pricing_strategies",
+          "is_static": true
+        },
+        {
+          "id": "link-010-5",
+          "source_id": "listing-optimizer-010",
+          "sink_id": "conversion-optimizer-010",
+          "source_name": "result",
+          "sink_name": "optimized_listings",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-010-6",
+          "source_id": "conversion-optimizer-010",
+          "sink_id": "inventory-manager-010",
+          "source_name": "result",
+          "sink_name": "conversion_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "inventory-manager-010",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "inventory_management"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-010-6",
+          "source_id": "conversion-optimizer-010",
+          "sink_id": "inventory-manager-010",
+          "source_name": "result",
+          "sink_name": "conversion_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-010-7",
+          "source_id": "inventory-manager-010",
+          "sink_id": "analytics-reporter-010",
+          "source_name": "result",
+          "sink_name": "inventory_strategies",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "analytics-reporter-010",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Analytics Report",
+        "value": "Generate comprehensive e-commerce performance report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-010-7",
+          "source_id": "inventory-manager-010",
+          "sink_id": "analytics-reporter-010",
+          "source_name": "result",
+          "sink_name": "inventory_strategies",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "ecommerce-pro-010",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

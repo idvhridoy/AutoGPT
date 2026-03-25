@@ -1,0 +1,275 @@
+{
+  "id": "customer-support-pro-006",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Customer Support & Chatbot Agent",
+  "description": "Intelligent customer support agent that provides 24/7 assistance, handles inquiries, resolves issues, and escalates complex problems to human agents",
+  "instructions": "You are an expert customer support specialist with excellent communication skills, empathy, and problem-solving abilities. You will: 1) Understand customer inquiries accurately 2) Provide helpful, accurate responses quickly 3) Handle multiple types of requests (technical support, billing, general inquiries) 4) Detect customer sentiment and adapt communication style 5) Escalate complex issues to human agents with full context 6) Maintain conversation history for continuity 7) Follow up on resolved issues to ensure satisfaction. Always be professional, empathetic, and solution-oriented.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "customer-input-006",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Customer Message",
+        "value": "Customer inquiry or support request"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-006-1",
+          "source_id": "customer-input-006",
+          "sink_id": "intent-classifier-006",
+          "source_name": "result",
+          "sink_name": "customer_message",
+          "is_static": true
+        }
+      ],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "intent-classifier-006",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "intent_classification"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-006-1",
+          "source_id": "customer-input-006",
+          "sink_id": "intent-classifier-006",
+          "source_name": "result",
+          "sink_name": "customer_message",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-006-2",
+          "source_id": "intent-classifier-006",
+          "sink_id": "sentiment-analyzer-006",
+          "source_name": "result",
+          "sink_name": "classified_intent",
+          "is_static": true
+        },
+        {
+          "id": "link-006-3",
+          "source_id": "intent-classifier-006",
+          "sink_id": "knowledge-retriever-006",
+          "source_name": "result",
+          "sink_name": "classified_intent",
+          "is_static": true
+        }
+      ],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "sentiment-analyzer-006",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "sentiment_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-006-2",
+          "source_id": "intent-classifier-006",
+          "sink_id": "sentiment-analyzer-006",
+          "source_name": "result",
+          "sink_name": "classified_intent",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-006-4",
+          "source_id": "sentiment-analyzer-006",
+          "sink_id": "response-generator-006",
+          "source_name": "result",
+          "sink_name": "sentiment_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "knowledge-retriever-006",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "knowledge_retrieval"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-006-3",
+          "source_id": "intent-classifier-006",
+          "sink_id": "knowledge-retriever-006",
+          "source_name": "result",
+          "sink_name": "classified_intent",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-006-5",
+          "source_id": "knowledge-retriever-006",
+          "sink_id": "response-generator-006",
+          "source_name": "result",
+          "sink_name": "relevant_knowledge",
+          "is_static": true
+        }
+      ],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "response-generator-006",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Response Generation",
+        "value": "Generate personalized customer response"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-006-4",
+          "source_id": "sentiment-analyzer-006",
+          "sink_id": "response-generator-006",
+          "source_name": "result",
+          "sink_name": "sentiment_data",
+          "is_static": true
+        },
+        {
+          "id": "link-006-5",
+          "source_id": "knowledge-retriever-006",
+          "sink_id": "response-generator-006",
+          "source_name": "result",
+          "sink_name": "relevant_knowledge",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-006-6",
+          "source_id": "response-generator-006",
+          "sink_id": "escalation-decider-006",
+          "source_name": "result",
+          "sink_name": "generated_response",
+          "is_static": true
+        }
+      ],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "escalation-decider-006",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "escalation_decision"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-006-6",
+          "source_id": "response-generator-006",
+          "sink_id": "escalation-decider-006",
+          "source_name": "result",
+          "sink_name": "generated_response",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-006-7",
+          "source_id": "escalation-decider-006",
+          "sink_id": "follow-up-manager-006",
+          "source_name": "result",
+          "sink_name": "escalation_decision",
+          "is_static": true
+        }
+      ],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "follow-up-manager-006",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Follow-up Management",
+        "value": "Manage follow-ups and customer satisfaction"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-006-7",
+          "source_id": "escalation-decider-006",
+          "sink_id": "follow-up-manager-006",
+          "source_name": "result",
+          "sink_name": "escalation_decision",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "customer-support-pro-006",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

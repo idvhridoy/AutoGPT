@@ -1,0 +1,275 @@
+{
+  "id": "cybersecurity-pro-008",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Cybersecurity Threat Detection Agent",
+  "description": "Advanced cybersecurity agent that monitors systems for threats, analyzes security logs, detects anomalies, and provides real-time threat intelligence",
+  "instructions": "You are an expert cybersecurity analyst with deep knowledge in network security, threat intelligence, incident response, and security operations. You will: 1) Monitor system logs and network traffic for suspicious activities 2) Identify potential security breaches and vulnerabilities 3) Analyze malware signatures and attack patterns 4) Provide real-time threat alerts with severity levels 5) Recommend immediate remediation actions 6) Generate security incident reports 7) Stay updated on latest threats and attack vectors. Always prioritize critical threats and provide clear, actionable guidance for security teams.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "security-input-008",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Security Data",
+        "value": "Upload logs, network data, or system metrics for analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-008-1",
+          "source_id": "security-input-008",
+          "sink_id": "log-parser-008",
+          "source_name": "result",
+          "sink_name": "raw_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "log-parser-008",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "security_log_parsing"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-008-1",
+          "source_id": "security-input-008",
+          "sink_id": "log-parser-008",
+          "source_name": "result",
+          "sink_name": "raw_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-008-2",
+          "source_id": "log-parser-008",
+          "sink_id": "anomaly-detector-008",
+          "source_name": "result",
+          "sink_name": "parsed_logs",
+          "is_static": true
+        },
+        {
+          "id": "link-008-3",
+          "source_id": "log-parser-008",
+          "sink_id": "threat-intel-008",
+          "source_name": "result",
+          "sink_name": "parsed_logs",
+          "is_static": true
+        }
+      ],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "anomaly-detector-008",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "anomaly_detection"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-008-2",
+          "source_id": "log-parser-008",
+          "sink_id": "anomaly-detector-008",
+          "source_name": "result",
+          "sink_name": "parsed_logs",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-008-4",
+          "source_id": "anomaly-detector-008",
+          "sink_id": "threat-analyzer-008",
+          "source_name": "result",
+          "sink_name": "anomalies",
+          "is_static": true
+        }
+      ],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "threat-intel-008",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "threat_intelligence"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-008-3",
+          "source_id": "log-parser-008",
+          "sink_id": "threat-intel-008",
+          "source_name": "result",
+          "sink_name": "parsed_logs",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-008-5",
+          "source_id": "threat-intel-008",
+          "sink_id": "threat-analyzer-008",
+          "source_name": "result",
+          "sink_name": "threat_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "threat-analyzer-008",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Threat Analysis",
+        "value": "Analyze and classify security threats"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-008-4",
+          "source_id": "anomaly-detector-008",
+          "sink_id": "threat-analyzer-008",
+          "source_name": "result",
+          "sink_name": "anomalies",
+          "is_static": true
+        },
+        {
+          "id": "link-008-5",
+          "source_id": "threat-intel-008",
+          "sink_id": "threat-analyzer-008",
+          "source_name": "result",
+          "sink_name": "threat_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-008-6",
+          "source_id": "threat-analyzer-008",
+          "sink_id": "incident-responder-008",
+          "source_name": "result",
+          "sink_name": "threat_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "incident-responder-008",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "incident_response"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-008-6",
+          "source_id": "threat-analyzer-008",
+          "sink_id": "incident-responder-008",
+          "source_name": "result",
+          "sink_name": "threat_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-008-7",
+          "source_id": "incident-responder-008",
+          "sink_id": "security-reporter-008",
+          "source_name": "result",
+          "sink_name": "response_actions",
+          "is_static": true
+        }
+      ],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "security-reporter-008",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Security Report",
+        "value": "Generate comprehensive security incident report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-008-7",
+          "source_id": "incident-responder-008",
+          "sink_id": "security-reporter-008",
+          "source_name": "result",
+          "sink_name": "response_actions",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "cybersecurity-pro-008",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}
