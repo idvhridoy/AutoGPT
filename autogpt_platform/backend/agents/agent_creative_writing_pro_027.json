@@ -1,0 +1,275 @@
+{
+  "id": "creative-writing-pro-027",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Creative Writing & Storytelling Agent",
+  "description": "Advanced creative writing agent that crafts stories, develops characters, creates plots, and assists with various creative writing projects",
+  "instructions": "You are an expert creative writer and storyteller with deep knowledge in narrative structure, character development, world-building, and various writing genres. You will: 1) Develop compelling plots and story arcs 2) Create complex and relatable characters 3) Build immersive worlds and settings 4) Write in various genres and styles 5) Provide constructive feedback on writing 6) Help overcome writer's block with creative prompts 7) Edit and improve narrative flow and dialogue. Always respect the writer's voice while providing creative suggestions that enhance the story.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "writing-input-027",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Writing Project",
+        "value": "Describe story idea, character, or upload writing sample"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-027-1",
+          "source_id": "writing-input-027",
+          "sink_id": "concept-developer-027",
+          "source_name": "result",
+          "sink_name": "writing_project",
+          "is_static": true
+        }
+      ],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "concept-developer-027",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "concept_development"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-027-1",
+          "source_id": "writing-input-027",
+          "sink_id": "concept-developer-027",
+          "source_name": "result",
+          "sink_name": "writing_project",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-027-2",
+          "source_id": "concept-developer-027",
+          "sink_id": "character-builder-027",
+          "source_name": "result",
+          "sink_name": "story_concept",
+          "is_static": true
+        },
+        {
+          "id": "link-027-3",
+          "source_id": "concept-developer-027",
+          "sink_id": "plot-designer-027",
+          "source_name": "result",
+          "sink_name": "story_concept",
+          "is_static": true
+        }
+      ],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "character-builder-027",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "character_development"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-027-2",
+          "source_id": "concept-developer-027",
+          "sink_id": "character-builder-027",
+          "source_name": "result",
+          "sink_name": "story_concept",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-027-4",
+          "source_id": "character-builder-027",
+          "sink_id": "world-builder-027",
+          "source_name": "result",
+          "sink_name": "character_profiles",
+          "is_static": true
+        }
+      ],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "plot-designer-027",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "plot_design"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-027-3",
+          "source_id": "concept-developer-027",
+          "sink_id": "plot-designer-027",
+          "source_name": "result",
+          "sink_name": "story_concept",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-027-5",
+          "source_id": "plot-designer-027",
+          "sink_id": "world-builder-027",
+          "source_name": "result",
+          "sink_name": "plot_outline",
+          "is_static": true
+        }
+      ],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "world-builder-027",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "World Building",
+        "value": "Create immersive settings and backstories"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-027-4",
+          "source_id": "character-builder-027",
+          "sink_id": "world-builder-027",
+          "source_name": "result",
+          "sink_name": "character_profiles",
+          "is_static": true
+        },
+        {
+          "id": "link-027-5",
+          "source_id": "plot-designer-027",
+          "sink_id": "world-builder-027",
+          "source_name": "result",
+          "sink_name": "plot_outline",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-027-6",
+          "source_id": "world-builder-027",
+          "sink_id": "writing-assistant-027",
+          "source_name": "result",
+          "sink_name": "world_setting",
+          "is_static": true
+        }
+      ],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "writing-assistant-027",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "writing_assistance"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-027-6",
+          "source_id": "world-builder-027",
+          "sink_id": "writing-assistant-027",
+          "source_name": "result",
+          "sink_name": "world_setting",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-027-7",
+          "source_id": "writing-assistant-027",
+          "sink_id": "editor-027",
+          "source_name": "result",
+          "sink_name": "draft_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "editor-027",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Editing & Refinement",
+        "value": "Review, edit, and refine the creative work"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-027-7",
+          "source_id": "writing-assistant-027",
+          "sink_id": "editor-027",
+          "source_name": "result",
+          "sink_name": "draft_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "creative-writing-pro-027",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "id": "voice-nlp-pro-024",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Voice Assistant & NLP Agent",
+  "description": "Advanced voice and NLP agent that processes speech, understands natural language, generates responses, and manages conversational AI",
+  "instructions": "You are an expert NLP engineer and voice AI specialist with deep knowledge in speech recognition, natural language understanding, dialogue management, and text-to-speech. You will: 1) Process and transcribe speech to text accurately 2) Understand user intent and extract entities 3) Generate contextual and natural responses 4) Manage multi-turn conversations and context 5) Implement sentiment analysis and emotion detection 6) Optimize for multiple languages and accents 7) Design voice user interfaces and flows. Always prioritize user privacy, accuracy, and natural conversation flow.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "voice-input-024",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Voice/Text Input",
+        "value": "Provide voice recording, text input, or conversation context"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-024-1",
+          "source_id": "voice-input-024",
+          "sink_id": "speech-processor-024",
+          "source_name": "result",
+          "sink_name": "input_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "speech-processor-024",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "speech_processing"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-024-1",
+          "source_id": "voice-input-024",
+          "sink_id": "speech-processor-024",
+          "source_name": "result",
+          "sink_name": "input_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-024-2",
+          "source_id": "speech-processor-024",
+          "sink_id": "nlu-engine-024",
+          "source_name": "result",
+          "sink_name": "processed_text",
+          "is_static": true
+        },
+        {
+          "id": "link-024-3",
+          "source_id": "speech-processor-024",
+          "sink_id": "sentiment-analyzer-024",
+          "source_name": "result",
+          "sink_name": "processed_text",
+          "is_static": true
+        }
+      ],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "nlu-engine-024",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "natural_language_understanding"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-024-2",
+          "source_id": "speech-processor-024",
+          "sink_id": "nlu-engine-024",
+          "source_name": "result",
+          "sink_name": "processed_text",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-024-4",
+          "source_id": "nlu-engine-024",
+          "sink_id": "dialogue-manager-024",
+          "source_name": "result",
+          "sink_name": "understood_intent",
+          "is_static": true
+        }
+      ],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "sentiment-analyzer-024",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "sentiment_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-024-3",
+          "source_id": "speech-processor-024",
+          "sink_id": "sentiment-analyzer-024",
+          "source_name": "result",
+          "sink_name": "processed_text",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-024-5",
+          "source_id": "sentiment-analyzer-024",
+          "sink_id": "dialogue-manager-024",
+          "source_name": "result",
+          "sink_name": "sentiment_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "dialogue-manager-024",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Dialogue Management",
+        "value": "Manage conversation context and flow"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-024-4",
+          "source_id": "nlu-engine-024",
+          "sink_id": "dialogue-manager-024",
+          "source_name": "result",
+          "sink_name": "understood_intent",
+          "is_static": true
+        },
+        {
+          "id": "link-024-5",
+          "source_id": "sentiment-analyzer-024",
+          "sink_id": "dialogue-manager-024",
+          "source_name": "result",
+          "sink_name": "sentiment_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-024-6",
+          "source_id": "dialogue-manager-024",
+          "sink_id": "response-generator-024",
+          "source_name": "result",
+          "sink_name": "dialogue_context",
+          "is_static": true
+        }
+      ],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "response-generator-024",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "response_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-024-6",
+          "source_id": "dialogue-manager-024",
+          "sink_id": "response-generator-024",
+          "source_name": "result",
+          "sink_name": "dialogue_context",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-024-7",
+          "source_id": "response-generator-024",
+          "sink_id": "tts-synthesizer-024",
+          "source_name": "result",
+          "sink_name": "generated_response",
+          "is_static": true
+        }
+      ],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "tts-synthesizer-024",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Text-to-Speech",
+        "value": "Convert text response to natural speech"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-024-7",
+          "source_id": "response-generator-024",
+          "sink_id": "tts-synthesizer-024",
+          "source_name": "result",
+          "sink_name": "generated_response",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "voice-nlp-pro-024",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

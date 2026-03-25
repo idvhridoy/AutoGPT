@@ -1,0 +1,275 @@
+{
+  "id": "robotics-pro-030",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Robotics & Automation Agent",
+  "description": "Advanced robotics agent that designs automation workflows, programs robots, optimizes manufacturing processes, and provides robotics solutions",
+  "instructions": "You are an expert robotics engineer with deep knowledge in industrial automation, robotic programming, computer vision, and manufacturing optimization. You will: 1) Design robotic workflows and automation solutions 2) Program industrial robots and cobots 3) Optimize manufacturing processes and efficiency 4) Implement computer vision for quality control 5) Design pick-and-place and assembly operations 6) Calculate ROI for automation projects 7) Provide maintenance and troubleshooting guidance. Always prioritize safety, efficiency, and reliability in all automation designs.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "robotics-input-030",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Automation Request",
+        "value": "Specify process to automate, robot type, or manufacturing challenge"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-030-1",
+          "source_id": "robotics-input-030",
+          "sink_id": "process-analyzer-030",
+          "source_name": "result",
+          "sink_name": "automation_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "process-analyzer-030",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "process_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-030-1",
+          "source_id": "robotics-input-030",
+          "sink_id": "process-analyzer-030",
+          "source_name": "result",
+          "sink_name": "automation_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-030-2",
+          "source_id": "process-analyzer-030",
+          "sink_id": "robot-designer-030",
+          "source_name": "result",
+          "sink_name": "process_analysis",
+          "is_static": true
+        },
+        {
+          "id": "link-030-3",
+          "source_id": "process-analyzer-030",
+          "sink_id": "workflow-optimizer-030",
+          "source_name": "result",
+          "sink_name": "process_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "robot-designer-030",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "robotic_design"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-030-2",
+          "source_id": "process-analyzer-030",
+          "sink_id": "robot-designer-030",
+          "source_name": "result",
+          "sink_name": "process_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-030-4",
+          "source_id": "robot-designer-030",
+          "sink_id": "programmer-030",
+          "source_name": "result",
+          "sink_name": "robot_specifications",
+          "is_static": true
+        }
+      ],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "workflow-optimizer-030",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "workflow_optimization"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-030-3",
+          "source_id": "process-analyzer-030",
+          "sink_id": "workflow-optimizer-030",
+          "source_name": "result",
+          "sink_name": "process_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-030-5",
+          "source_id": "workflow-optimizer-030",
+          "sink_id": "programmer-030",
+          "source_name": "result",
+          "sink_name": "optimized_workflow",
+          "is_static": true
+        }
+      ],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "programmer-030",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Robot Programming",
+        "value": "Program robots and automation sequences"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-030-4",
+          "source_id": "robot-designer-030",
+          "sink_id": "programmer-030",
+          "source_name": "result",
+          "sink_name": "robot_specifications",
+          "is_static": true
+        },
+        {
+          "id": "link-030-5",
+          "source_id": "workflow-optimizer-030",
+          "sink_id": "programmer-030",
+          "source_name": "result",
+          "sink_name": "optimized_workflow",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-030-6",
+          "source_id": "programmer-030",
+          "sink_id": "simulator-030",
+          "source_name": "result",
+          "sink_name": "robot_programs",
+          "is_static": true
+        }
+      ],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "simulator-030",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "simulation_testing"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-030-6",
+          "source_id": "programmer-030",
+          "sink_id": "simulator-030",
+          "source_name": "result",
+          "sink_name": "robot_programs",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-030-7",
+          "source_id": "simulator-030",
+          "sink_id": "report-generator-030",
+          "source_name": "result",
+          "sink_name": "simulation_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-030",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Robotics Report",
+        "value": "Generate comprehensive automation solution report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-030-7",
+          "source_id": "simulator-030",
+          "sink_id": "report-generator-030",
+          "source_name": "result",
+          "sink_name": "simulation_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "robotics-pro-030",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

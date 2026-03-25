@@ -1,0 +1,275 @@
+{
+  "id": "environmental-monitoring-pro-028",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Environmental Monitoring Agent",
+  "description": "Comprehensive environmental monitoring agent that tracks pollution, climate data, wildlife patterns, and provides sustainability insights",
+  "instructions": "You are an expert environmental scientist with deep knowledge in climate monitoring, pollution tracking, ecological systems, and sustainability practices. You will: 1) Monitor air and water quality metrics 2) Track climate patterns and changes 3) Analyze wildlife behavior and ecosystem health 4) Predict environmental risks and disasters 5) Provide sustainability recommendations 6) Generate environmental impact assessments 7) Track carbon footprint and emissions. Always prioritize environmental protection and provide actionable insights for conservation efforts.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "environmental-input-028",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Environmental Data",
+        "value": "Upload sensor data, location coordinates, or specify monitoring needs"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-028-1",
+          "source_id": "environmental-input-028",
+          "sink_id": "data-collector-028",
+          "source_name": "result",
+          "sink_name": "environmental_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "data-collector-028",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "environmental_data_collection"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-028-1",
+          "source_id": "environmental-input-028",
+          "sink_id": "data-collector-028",
+          "source_name": "result",
+          "sink_name": "environmental_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-028-2",
+          "source_id": "data-collector-028",
+          "sink_id": "pollution-monitor-028",
+          "source_name": "result",
+          "sink_name": "collected_data",
+          "is_static": true
+        },
+        {
+          "id": "link-028-3",
+          "source_id": "data-collector-028",
+          "sink_id": "climate-tracker-028",
+          "source_name": "result",
+          "sink_name": "collected_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "pollution-monitor-028",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "pollution_monitoring"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-028-2",
+          "source_id": "data-collector-028",
+          "sink_id": "pollution-monitor-028",
+          "source_name": "result",
+          "sink_name": "collected_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-028-4",
+          "source_id": "pollution-monitor-028",
+          "sink_id": "risk-predictor-028",
+          "source_name": "result",
+          "sink_name": "pollution_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "climate-tracker-028",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "climate_tracking"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-028-3",
+          "source_id": "data-collector-028",
+          "sink_id": "climate-tracker-028",
+          "source_name": "result",
+          "sink_name": "collected_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-028-5",
+          "source_id": "climate-tracker-028",
+          "sink_id": "risk-predictor-028",
+          "source_name": "result",
+          "sink_name": "climate_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "risk-predictor-028",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Environmental Risk Prediction",
+        "value": "Predict environmental risks and disasters"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-028-4",
+          "source_id": "pollution-monitor-028",
+          "sink_id": "risk-predictor-028",
+          "source_name": "result",
+          "sink_name": "pollution_data",
+          "is_static": true
+        },
+        {
+          "id": "link-028-5",
+          "source_id": "climate-tracker-028",
+          "sink_id": "risk-predictor-028",
+          "source_name": "result",
+          "sink_name": "climate_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-028-6",
+          "source_id": "risk-predictor-028",
+          "sink_id": "sustainability-advisor-028",
+          "source_name": "result",
+          "sink_name": "risk_assessment",
+          "is_static": true
+        }
+      ],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "sustainability-advisor-028",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "sustainability_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-028-6",
+          "source_id": "risk-predictor-028",
+          "sink_id": "sustainability-advisor-028",
+          "source_name": "result",
+          "sink_name": "risk_assessment",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-028-7",
+          "source_id": "sustainability-advisor-028",
+          "sink_id": "report-generator-028",
+          "source_name": "result",
+          "sink_name": "sustainability_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-028",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Environmental Report",
+        "value": "Generate comprehensive environmental monitoring report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-028-7",
+          "source_id": "sustainability-advisor-028",
+          "sink_id": "report-generator-028",
+          "source_name": "result",
+          "sink_name": "sustainability_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "environmental-monitoring-pro-028",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

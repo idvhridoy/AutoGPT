@@ -1,0 +1,275 @@
+{
+  "id": "devops-pro-025",
+  "version": 1,
+  "is_active": true,
+  "name": "AI DevOps & Infrastructure Automation Agent",
+  "description": "Comprehensive DevOps agent that automates deployments, manages infrastructure, monitors systems, and optimizes CI/CD pipelines",
+  "instructions": "You are an expert DevOps engineer with deep knowledge in cloud infrastructure, containerization, CI/CD pipelines, infrastructure as code, and system monitoring. You will: 1) Design and optimize CI/CD pipelines 2) Automate infrastructure provisioning and management 3) Implement monitoring and alerting strategies 4) Optimize cloud costs and resource usage 5) Manage container orchestration and microservices 6) Implement security best practices in DevOps 7) Generate deployment scripts and automation playbooks. Always prioritize reliability, security, and scalability in all infrastructure decisions.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "devops-input-025",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Infrastructure Request",
+        "value": "Specify deployment needs, infrastructure requirements, or automation tasks"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-025-1",
+          "source_id": "devops-input-025",
+          "sink_id": "infra-planner-025",
+          "source_name": "result",
+          "sink_name": "devops_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "infra-planner-025",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "infrastructure_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-025-1",
+          "source_id": "devops-input-025",
+          "sink_id": "infra-planner-025",
+          "source_name": "result",
+          "sink_name": "devops_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-025-2",
+          "source_id": "infra-planner-025",
+          "sink_id": "pipeline-builder-025",
+          "source_name": "result",
+          "sink_name": "infra_plan",
+          "is_static": true
+        },
+        {
+          "id": "link-025-3",
+          "source_id": "infra-planner-025",
+          "sink_id": "automation-engineer-025",
+          "source_name": "result",
+          "sink_name": "infra_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "pipeline-builder-025",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "pipeline_building"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-025-2",
+          "source_id": "infra-planner-025",
+          "sink_id": "pipeline-builder-025",
+          "source_name": "result",
+          "sink_name": "infra_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-025-4",
+          "source_id": "pipeline-builder-025",
+          "sink_id": "monitoring-setup-025",
+          "source_name": "result",
+          "sink_name": "ci_cd_pipeline",
+          "is_static": true
+        }
+      ],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "automation-engineer-025",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "infrastructure_automation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-025-3",
+          "source_id": "infra-planner-025",
+          "sink_id": "automation-engineer-025",
+          "source_name": "result",
+          "sink_name": "infra_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-025-5",
+          "source_id": "automation-engineer-025",
+          "sink_id": "monitoring-setup-025",
+          "source_name": "result",
+          "sink_name": "automation_scripts",
+          "is_static": true
+        }
+      ],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "monitoring-setup-025",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Monitoring Setup",
+        "value": "Configure monitoring, logging, and alerting"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-025-4",
+          "source_id": "pipeline-builder-025",
+          "sink_id": "monitoring-setup-025",
+          "source_name": "result",
+          "sink_name": "ci_cd_pipeline",
+          "is_static": true
+        },
+        {
+          "id": "link-025-5",
+          "source_id": "automation-engineer-025",
+          "sink_id": "monitoring-setup-025",
+          "source_name": "result",
+          "sink_name": "automation_scripts",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-025-6",
+          "source_id": "monitoring-setup-025",
+          "sink_id": "security-hardener-025",
+          "source_name": "result",
+          "sink_name": "monitoring_config",
+          "is_static": true
+        }
+      ],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "security-hardener-025",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "security_hardening"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-025-6",
+          "source_id": "monitoring-setup-025",
+          "sink_id": "security-hardener-025",
+          "source_name": "result",
+          "sink_name": "monitoring_config",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-025-7",
+          "source_id": "security-hardener-025",
+          "sink_id": "report-generator-025",
+          "source_name": "result",
+          "sink_name": "security_config",
+          "is_static": true
+        }
+      ],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-025",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "DevOps Report",
+        "value": "Generate comprehensive infrastructure and deployment report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-025-7",
+          "source_id": "security-hardener-025",
+          "sink_id": "report-generator-025",
+          "source_name": "result",
+          "sink_name": "security_config",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "devops-pro-025",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "id": "blockchain-pro-023",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Blockchain & Smart Contract Agent",
+  "description": "Advanced blockchain agent that develops smart contracts, analyzes transactions, audits code, and provides blockchain solutions",
+  "instructions": "You are an expert blockchain developer with deep knowledge in smart contract development, DeFi protocols, NFTs, and blockchain security. You will: 1) Develop and audit smart contracts for various platforms 2) Analyze blockchain transactions and patterns 3) Design tokenomics and DeFi strategies 4) Implement blockchain security best practices 5) Optimize gas usage and contract efficiency 6) Create DApp architectures and integration plans 7) Provide blockchain solution recommendations. Always prioritize security, audit thoroughly, and consider gas optimization in all implementations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "blockchain-input-023",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Blockchain Request",
+        "value": "Specify smart contract needs, DApp requirements, or analysis tasks"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-023-1",
+          "source_id": "blockchain-input-023",
+          "sink_id": "requirement-analyzer-023",
+          "source_name": "result",
+          "sink_name": "blockchain_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "requirement-analyzer-023",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "blockchain_requirement_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-023-1",
+          "source_id": "blockchain-input-023",
+          "sink_id": "requirement-analyzer-023",
+          "source_name": "result",
+          "sink_name": "blockchain_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-023-2",
+          "source_id": "requirement-analyzer-023",
+          "sink_id": "contract-developer-023",
+          "source_name": "result",
+          "sink_name": "analyzed_requirements",
+          "is_static": true
+        },
+        {
+          "id": "link-023-3",
+          "source_id": "requirement-analyzer-023",
+          "sink_id": "transaction-analyzer-023",
+          "source_name": "result",
+          "sink_name": "analyzed_requirements",
+          "is_static": true
+        }
+      ],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "contract-developer-023",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "smart_contract_development"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-023-2",
+          "source_id": "requirement-analyzer-023",
+          "sink_id": "contract-developer-023",
+          "source_name": "result",
+          "sink_name": "analyzed_requirements",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-023-4",
+          "source_id": "contract-developer-023",
+          "sink_id": "security-auditor-023",
+          "source_name": "result",
+          "sink_name": "smart_contracts",
+          "is_static": true
+        }
+      ],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "transaction-analyzer-023",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "transaction_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-023-3",
+          "source_id": "requirement-analyzer-023",
+          "sink_id": "transaction-analyzer-023",
+          "source_name": "result",
+          "sink_name": "analyzed_requirements",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-023-5",
+          "source_id": "transaction-analyzer-023",
+          "sink_id": "security-auditor-023",
+          "source_name": "result",
+          "sink_name": "transaction_patterns",
+          "is_static": true
+        }
+      ],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "security-auditor-023",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Security Audit",
+        "value": "Audit smart contracts and blockchain security"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-023-4",
+          "source_id": "contract-developer-023",
+          "sink_id": "security-auditor-023",
+          "source_name": "result",
+          "sink_name": "smart_contracts",
+          "is_static": true
+        },
+        {
+          "id": "link-023-5",
+          "source_id": "transaction-analyzer-023",
+          "sink_id": "security-auditor-023",
+          "source_name": "result",
+          "sink_name": "transaction_patterns",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-023-6",
+          "source_id": "security-auditor-023",
+          "sink_id": "gas-optimizer-023",
+          "source_name": "result",
+          "sink_name": "audit_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "gas-optimizer-023",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "gas_optimization"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-023-6",
+          "source_id": "security-auditor-023",
+          "sink_id": "gas-optimizer-023",
+          "source_name": "result",
+          "sink_name": "audit_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-023-7",
+          "source_id": "gas-optimizer-023",
+          "sink_id": "deployment-advisor-023",
+          "source_name": "result",
+          "sink_name": "optimized_contracts",
+          "is_static": true
+        }
+      ],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "deployment-advisor-023",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Deployment Strategy",
+        "value": "Plan blockchain deployment and integration"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-023-7",
+          "source_id": "gas-optimizer-023",
+          "sink_id": "deployment-advisor-023",
+          "source_name": "result",
+          "sink_name": "optimized_contracts",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "blockchain-pro-023",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

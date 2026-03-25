@@ -1,0 +1,275 @@
+{
+  "id": "api-development-pro-021",
+  "version": 1,
+  "is_active": true,
+  "name": "AI API Development & Integration Agent",
+  "description": "Advanced API development agent that designs, builds, documents, and optimizes RESTful APIs and integrations",
+  "instructions": "You are an expert API architect and backend developer with deep knowledge in RESTful design, GraphQL, microservices, API security, and integration patterns. You will: 1) Design scalable API architectures following best practices 2) Generate API specifications (OpenAPI/Swagger) 3) Create endpoint implementations and data models 4) Implement authentication and authorization 5) Optimize API performance and caching strategies 6) Generate comprehensive API documentation 7) Design integration patterns for third-party services. Always follow RESTful principles, security best practices, and ensure backward compatibility.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "api-input-021",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "API Requirements",
+        "value": "Specify API endpoints, data models, or integration needs"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-021-1",
+          "source_id": "api-input-021",
+          "sink_id": "api-designer-021",
+          "source_name": "result",
+          "sink_name": "api_requirements",
+          "is_static": true
+        }
+      ],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "api-designer-021",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "api_architecture_design"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-021-1",
+          "source_id": "api-input-021",
+          "sink_id": "api-designer-021",
+          "source_name": "result",
+          "sink_name": "api_requirements",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-021-2",
+          "source_id": "api-designer-021",
+          "sink_id": "endpoint-generator-021",
+          "source_name": "result",
+          "sink_name": "api_architecture",
+          "is_static": true
+        },
+        {
+          "id": "link-021-3",
+          "source_id": "api-designer-021",
+          "sink_id": "security-implementer-021",
+          "source_name": "result",
+          "sink_name": "api_architecture",
+          "is_static": true
+        }
+      ],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "endpoint-generator-021",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "endpoint_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-021-2",
+          "source_id": "api-designer-021",
+          "sink_id": "endpoint-generator-021",
+          "source_name": "result",
+          "sink_name": "api_architecture",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-021-4",
+          "source_id": "endpoint-generator-021",
+          "sink_id": "documentation-generator-021",
+          "source_name": "result",
+          "sink_name": "endpoints",
+          "is_static": true
+        }
+      ],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "security-implementer-021",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "security_implementation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-021-3",
+          "source_id": "api-designer-021",
+          "sink_id": "security-implementer-021",
+          "source_name": "result",
+          "sink_name": "api_architecture",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-021-5",
+          "source_id": "security-implementer-021",
+          "sink_id": "documentation-generator-021",
+          "source_name": "result",
+          "sink_name": "security_layer",
+          "is_static": true
+        }
+      ],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "documentation-generator-021",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "API Documentation",
+        "value": "Generate OpenAPI specs and interactive documentation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-021-4",
+          "source_id": "endpoint-generator-021",
+          "sink_id": "documentation-generator-021",
+          "source_name": "result",
+          "sink_name": "endpoints",
+          "is_static": true
+        },
+        {
+          "id": "link-021-5",
+          "source_id": "security-implementer-021",
+          "sink_id": "documentation-generator-021",
+          "source_name": "result",
+          "sink_name": "security_layer",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-021-6",
+          "source_id": "documentation-generator-021",
+          "sink_id": "integration-advisor-021",
+          "source_name": "result",
+          "sink_name": "api_documentation",
+          "is_static": true
+        }
+      ],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "integration-advisor-021",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "integration_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-021-6",
+          "source_id": "documentation-generator-021",
+          "sink_id": "integration-advisor-021",
+          "source_name": "result",
+          "sink_name": "api_documentation",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-021-7",
+          "source_id": "integration-advisor-021",
+          "sink_id": "testing-suite-021",
+          "source_name": "result",
+          "sink_name": "integration_patterns",
+          "is_static": true
+        }
+      ],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "testing-suite-021",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "API Testing Suite",
+        "value": "Generate comprehensive API tests and monitoring"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-021-7",
+          "source_id": "integration-advisor-021",
+          "sink_id": "testing-suite-021",
+          "source_name": "result",
+          "sink_name": "integration_patterns",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "api-development-pro-021",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

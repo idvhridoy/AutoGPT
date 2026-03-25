@@ -1,0 +1,275 @@
+{
+  "id": "privacy-compliance-pro-026",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Data Privacy & Compliance Agent",
+  "description": "Advanced privacy and compliance agent that ensures GDPR, CCPA, HIPAA compliance, manages data governance, and conducts privacy audits",
+  "instructions": "You are an expert data privacy officer with deep knowledge in GDPR, CCPA, HIPAA, data protection regulations, and privacy frameworks. You will: 1) Analyze data handling practices for compliance 2) Identify privacy risks and data breaches 3) Generate privacy policies and consent forms 4) Conduct Data Protection Impact Assessments (DPIAs) 5) Manage data subject rights requests 6) Implement privacy by design principles 7) Provide compliance training and guidelines. Always prioritize user privacy, data minimization, and regulatory compliance in all recommendations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "privacy-input-026",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Compliance Request",
+        "value": "Specify regulation, data practices, or upload privacy documents"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-026-1",
+          "source_id": "privacy-input-026",
+          "sink_id": "compliance-analyzer-026",
+          "source_name": "result",
+          "sink_name": "privacy_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "compliance-analyzer-026",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "compliance_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-026-1",
+          "source_id": "privacy-input-026",
+          "sink_id": "compliance-analyzer-026",
+          "source_name": "result",
+          "sink_name": "privacy_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-026-2",
+          "source_id": "compliance-analyzer-026",
+          "sink_id": "risk-assessor-026",
+          "source_name": "result",
+          "sink_name": "compliance_status",
+          "is_static": true
+        },
+        {
+          "id": "link-026-3",
+          "source_id": "compliance-analyzer-026",
+          "sink_id": "policy-generator-026",
+          "source_name": "result",
+          "sink_name": "compliance_status",
+          "is_static": true
+        }
+      ],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "risk-assessor-026",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "privacy_risk_assessment"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-026-2",
+          "source_id": "compliance-analyzer-026",
+          "sink_id": "risk-assessor-026",
+          "source_name": "result",
+          "sink_name": "compliance_status",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-026-4",
+          "source_id": "risk-assessor-026",
+          "sink_id": "dpia-conductor-026",
+          "source_name": "result",
+          "sink_name": "privacy_risks",
+          "is_static": true
+        }
+      ],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "policy-generator-026",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "policy_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-026-3",
+          "source_id": "compliance-analyzer-026",
+          "sink_id": "policy-generator-026",
+          "source_name": "result",
+          "sink_name": "compliance_status",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-026-5",
+          "source_id": "policy-generator-026",
+          "sink_id": "dpia-conductor-026",
+          "source_name": "result",
+          "sink_name": "privacy_policies",
+          "is_static": true
+        }
+      ],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "dpia-conductor-026",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "DPIA Conductor",
+        "value": "Conduct Data Protection Impact Assessments"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-026-4",
+          "source_id": "risk-assessor-026",
+          "sink_id": "dpia-conductor-026",
+          "source_name": "result",
+          "sink_name": "privacy_risks",
+          "is_static": true
+        },
+        {
+          "id": "link-026-5",
+          "source_id": "policy-generator-026",
+          "sink_id": "dpia-conductor-026",
+          "source_name": "result",
+          "sink_name": "privacy_policies",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-026-6",
+          "source_id": "dpia-conductor-026",
+          "sink_id": "governance-advisor-026",
+          "source_name": "result",
+          "sink_name": "dpia_results",
+          "is_static": true
+        }
+      ],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "governance-advisor-026",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "data_governance_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-026-6",
+          "source_id": "dpia-conductor-026",
+          "sink_id": "governance-advisor-026",
+          "source_name": "result",
+          "sink_name": "dpia_results",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-026-7",
+          "source_id": "governance-advisor-026",
+          "sink_id": "report-generator-026",
+          "source_name": "result",
+          "sink_name": "governance_framework",
+          "is_static": true
+        }
+      ],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-026",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Compliance Report",
+        "value": "Generate comprehensive privacy and compliance report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-026-7",
+          "source_id": "governance-advisor-026",
+          "sink_id": "report-generator-026",
+          "source_name": "result",
+          "sink_name": "governance_framework",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "privacy-compliance-pro-026",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

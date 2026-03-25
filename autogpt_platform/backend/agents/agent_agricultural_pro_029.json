@@ -1,0 +1,275 @@
+{
+  "id": "agricultural-pro-029",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Agricultural Optimization Agent",
+  "description": "Advanced agricultural agent that optimizes crop management, monitors soil health, predicts yields, and provides farming insights",
+  "instructions": "You are an expert agricultural scientist with deep knowledge in crop management, soil science, precision farming, and sustainable agriculture. You will: 1) Analyze soil conditions and recommend improvements 2) Optimize planting schedules and crop rotations 3) Monitor crop health and detect diseases early 4) Predict yields based on weather and conditions 5) Recommend irrigation and fertilization schedules 6) Provide pest management strategies 7. Suggest sustainable farming practices. Always prioritize environmental sustainability and economic viability in recommendations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "agricultural-input-029",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Farm Data",
+        "value": "Upload soil reports, crop data, weather info, or farm specifications"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-029-1",
+          "source_id": "agricultural-input-029",
+          "sink_id": "soil-analyzer-029",
+          "source_name": "result",
+          "sink_name": "farm_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "soil-analyzer-029",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "soil_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-029-1",
+          "source_id": "agricultural-input-029",
+          "sink_id": "soil-analyzer-029",
+          "source_name": "result",
+          "sink_name": "farm_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-029-2",
+          "source_id": "soil-analyzer-029",
+          "sink_id": "crop-advisor-029",
+          "source_name": "result",
+          "sink_name": "soil_health",
+          "is_static": true
+        },
+        {
+          "id": "link-029-3",
+          "source_id": "soil-analyzer-029",
+          "sink_id": "irrigation-planner-029",
+          "source_name": "result",
+          "sink_name": "soil_health",
+          "is_static": true
+        }
+      ],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "crop-advisor-029",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "crop_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-029-2",
+          "source_id": "soil-analyzer-029",
+          "sink_id": "crop-advisor-029",
+          "source_name": "result",
+          "sink_name": "soil_health",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-029-4",
+          "source_id": "crop-advisor-029",
+          "sink_id": "yield-predictor-029",
+          "source_name": "result",
+          "sink_name": "crop_recommendations",
+          "is_static": true
+        }
+      ],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "irrigation-planner-029",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "irrigation_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-029-3",
+          "source_id": "soil-analyzer-029",
+          "sink_id": "irrigation-planner-029",
+          "source_name": "result",
+          "sink_name": "soil_health",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-029-5",
+          "source_id": "irrigation-planner-029",
+          "sink_id": "yield-predictor-029",
+          "source_name": "result",
+          "sink_name": "irrigation_schedule",
+          "is_static": true
+        }
+      ],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "yield-predictor-029",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Yield Prediction",
+        "value": "Predict crop yields based on all factors"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-029-4",
+          "source_id": "crop-advisor-029",
+          "sink_id": "yield-predictor-029",
+          "source_name": "result",
+          "sink_name": "crop_recommendations",
+          "is_static": true
+        },
+        {
+          "id": "link-029-5",
+          "source_id": "irrigation-planner-029",
+          "sink_id": "yield-predictor-029",
+          "source_name": "result",
+          "sink_name": "irrigation_schedule",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-029-6",
+          "source_id": "yield-predictor-029",
+          "sink_id": "sustainability-advisor-029",
+          "source_name": "result",
+          "sink_name": "yield_forecast",
+          "is_static": true
+        }
+      ],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "sustainability-advisor-029",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "sustainability_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-029-6",
+          "source_id": "yield-predictor-029",
+          "sink_id": "sustainability-advisor-029",
+          "source_name": "result",
+          "sink_name": "yield_forecast",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-029-7",
+          "source_id": "sustainability-advisor-029",
+          "sink_id": "report-generator-029",
+          "source_name": "result",
+          "sink_name": "sustainability_practices",
+          "is_static": true
+        }
+      ],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-029",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Agricultural Report",
+        "value": "Generate comprehensive farm optimization report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-029-7",
+          "source_id": "sustainability-advisor-029",
+          "sink_id": "report-generator-029",
+          "source_name": "result",
+          "sink_name": "sustainability_practices",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "agricultural-pro-029",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

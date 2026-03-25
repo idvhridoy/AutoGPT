@@ -1,0 +1,275 @@
+{
+  "id": "iot-management-pro-022",
+  "version": 1,
+  "is_active": true,
+  "name": "AI IoT Device Management Agent",
+  "description": "Comprehensive IoT management agent that monitors devices, manages connectivity, analyzes sensor data, and optimizes IoT networks",
+  "instructions": "You are an expert IoT specialist with deep knowledge in device management, sensor networks, edge computing, and IoT security. You will: 1) Monitor IoT device health and connectivity status 2) Analyze sensor data patterns and anomalies 3) Optimize device configurations and power usage 4) Manage firmware updates and device provisioning 5) Implement IoT security protocols and threat detection 6) Design edge computing strategies for data processing 7) Generate predictive maintenance schedules. Always prioritize security, data privacy, and network reliability in all recommendations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "iot-input-022",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "IoT Network Data",
+        "value": "Upload device inventory, sensor data, or network topology"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-022-1",
+          "source_id": "iot-input-022",
+          "sink_id": "device-monitor-022",
+          "source_name": "result",
+          "sink_name": "iot_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "device-monitor-022",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "device_monitoring"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-022-1",
+          "source_id": "iot-input-022",
+          "sink_id": "device-monitor-022",
+          "source_name": "result",
+          "sink_name": "iot_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-022-2",
+          "source_id": "device-monitor-022",
+          "sink_id": "data-analyzer-022",
+          "source_name": "result",
+          "sink_name": "device_status",
+          "is_static": true
+        },
+        {
+          "id": "link-022-3",
+          "source_id": "device-monitor-022",
+          "sink_id": "security-scanner-022",
+          "source_name": "result",
+          "sink_name": "device_status",
+          "is_static": true
+        }
+      ],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "data-analyzer-022",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "sensor_data_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-022-2",
+          "source_id": "device-monitor-022",
+          "sink_id": "data-analyzer-022",
+          "source_name": "result",
+          "sink_name": "device_status",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-022-4",
+          "source_id": "data-analyzer-022",
+          "sink_id": "optimization-engine-022",
+          "source_name": "result",
+          "sink_name": "data_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "security-scanner-022",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "iot_security_scanning"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-022-3",
+          "source_id": "device-monitor-022",
+          "sink_id": "security-scanner-022",
+          "source_name": "result",
+          "sink_name": "device_status",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-022-5",
+          "source_id": "security-scanner-022",
+          "sink_id": "optimization-engine-022",
+          "source_name": "result",
+          "sink_name": "security_status",
+          "is_static": true
+        }
+      ],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "optimization-engine-022",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "IoT Optimization",
+        "value": "Optimize device performance and network efficiency"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-022-4",
+          "source_id": "data-analyzer-022",
+          "sink_id": "optimization-engine-022",
+          "source_name": "result",
+          "sink_name": "data_insights",
+          "is_static": true
+        },
+        {
+          "id": "link-022-5",
+          "source_id": "security-scanner-022",
+          "sink_id": "optimization-engine-022",
+          "source_name": "result",
+          "sink_name": "security_status",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-022-6",
+          "source_id": "optimization-engine-022",
+          "sink_id": "predictive-maintainer-022",
+          "source_name": "result",
+          "sink_name": "optimization_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "predictive-maintainer-022",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "predictive_maintenance"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-022-6",
+          "source_id": "optimization-engine-022",
+          "sink_id": "predictive-maintainer-022",
+          "source_name": "result",
+          "sink_name": "optimization_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-022-7",
+          "source_id": "predictive-maintainer-022",
+          "sink_id": "report-generator-022",
+          "source_name": "result",
+          "sink_name": "maintenance_schedule",
+          "is_static": true
+        }
+      ],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-022",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "IoT Management Report",
+        "value": "Generate comprehensive IoT network analytics report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-022-7",
+          "source_id": "predictive-maintainer-022",
+          "sink_id": "report-generator-022",
+          "source_name": "result",
+          "sink_name": "maintenance_schedule",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "iot-management-pro-022",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}
