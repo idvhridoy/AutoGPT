@@ -1,0 +1,275 @@
+{
+  "id": "supply-chain-pro-015",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Supply Chain Optimization Agent",
+  "description": "Advanced supply chain agent that optimizes logistics, inventory management, demand forecasting, and supplier relationships",
+  "instructions": "You are an expert supply chain manager with deep knowledge in logistics optimization, inventory management, demand forecasting, and supplier relationship management. You will: 1) Analyze supply chain networks and identify bottlenecks 2) Optimize inventory levels and reorder points 3) Forecast demand using historical data and market trends 4) Evaluate supplier performance and risks 5) Suggest logistics improvements and cost reductions 6) Monitor supply chain disruptions and provide contingency plans 7) Generate comprehensive supply chain analytics reports. Always focus on reducing costs while improving reliability and customer satisfaction.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "supply-input-015",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Supply Chain Data",
+        "value": "Upload inventory data, sales forecasts, or supply chain metrics"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-015-1",
+          "source_id": "supply-input-015",
+          "sink_id": "network-analyzer-015",
+          "source_name": "result",
+          "sink_name": "supply_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "network-analyzer-015",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "supply_network_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-015-1",
+          "source_id": "supply-input-015",
+          "sink_id": "network-analyzer-015",
+          "source_name": "result",
+          "sink_name": "supply_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-015-2",
+          "source_id": "network-analyzer-015",
+          "sink_id": "demand-forecaster-015",
+          "source_name": "result",
+          "sink_name": "network_analysis",
+          "is_static": true
+        },
+        {
+          "id": "link-015-3",
+          "source_id": "network-analyzer-015",
+          "sink_id": "inventory-optimizer-015",
+          "source_name": "result",
+          "sink_name": "network_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "demand-forecaster-015",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "demand_forecasting"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-015-2",
+          "source_id": "network-analyzer-015",
+          "sink_id": "demand-forecaster-015",
+          "source_name": "result",
+          "sink_name": "network_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-015-4",
+          "source_id": "demand-forecaster-015",
+          "sink_id": "logistics-optimizer-015",
+          "source_name": "result",
+          "sink_name": "demand_forecast",
+          "is_static": true
+        }
+      ],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "inventory-optimizer-015",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "inventory_optimization"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-015-3",
+          "source_id": "network-analyzer-015",
+          "sink_id": "inventory-optimizer-015",
+          "source_name": "result",
+          "sink_name": "network_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-015-5",
+          "source_id": "inventory-optimizer-015",
+          "sink_id": "logistics-optimizer-015",
+          "source_name": "result",
+          "sink_name": "inventory_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "logistics-optimizer-015",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Logistics Optimization",
+        "value": "Optimize transportation and distribution networks"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-015-4",
+          "source_id": "demand-forecaster-015",
+          "sink_id": "logistics-optimizer-015",
+          "source_name": "result",
+          "sink_name": "demand_forecast",
+          "is_static": true
+        },
+        {
+          "id": "link-015-5",
+          "source_id": "inventory-optimizer-015",
+          "sink_id": "logistics-optimizer-015",
+          "source_name": "result",
+          "sink_name": "inventory_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-015-6",
+          "source_id": "logistics-optimizer-015",
+          "sink_id": "risk-monitor-015",
+          "source_name": "result",
+          "sink_name": "logistics_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "risk-monitor-015",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "risk_monitoring"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-015-6",
+          "source_id": "logistics-optimizer-015",
+          "sink_id": "risk-monitor-015",
+          "source_name": "result",
+          "sink_name": "logistics_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-015-7",
+          "source_id": "risk-monitor-015",
+          "sink_id": "report-generator-015",
+          "source_name": "result",
+          "sink_name": "risk_assessment",
+          "is_static": true
+        }
+      ],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-015",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Supply Chain Report",
+        "value": "Generate comprehensive supply chain optimization report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-015-7",
+          "source_id": "risk-monitor-015",
+          "sink_id": "report-generator-015",
+          "source_name": "result",
+          "sink_name": "risk_assessment",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "supply-chain-pro-015",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

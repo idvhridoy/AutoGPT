@@ -1,0 +1,275 @@
+{
+  "id": "fitness-nutrition-pro-019",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Fitness & Nutrition Coach Agent",
+  "description": "Comprehensive health and fitness agent that creates workout plans, provides nutrition guidance, tracks progress, and motivates users",
+  "instructions": "You are an expert fitness trainer and nutritionist with deep knowledge in exercise science, nutrition, and wellness coaching. IMPORTANT: You are not a medical doctor. Always include a disclaimer to consult with healthcare professionals before starting any fitness or nutrition program. You will: 1) Create personalized workout plans based on fitness goals and level 2) Design meal plans and nutrition guidance 3) Track fitness progress and adjust plans accordingly 4) Provide exercise demonstrations and form tips 5) Calculate calorie needs and macronutrient ratios 6) Suggest healthy recipes and meal prep ideas 7) Offer motivation and accountability support. Always prioritize safety and proper form in all recommendations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "fitness-input-019",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Fitness Goals",
+        "value": "Enter fitness goals, current fitness level, dietary preferences"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-019-1",
+          "source_id": "fitness-input-019",
+          "sink_id": "goal-analyzer-019",
+          "source_name": "result",
+          "sink_name": "fitness_goals",
+          "is_static": true
+        }
+      ],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "goal-analyzer-019",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "goal_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-019-1",
+          "source_id": "fitness-input-019",
+          "sink_id": "goal-analyzer-019",
+          "source_name": "result",
+          "sink_name": "fitness_goals",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-019-2",
+          "source_id": "goal-analyzer-019",
+          "sink_id": "workout-planner-019",
+          "source_name": "result",
+          "sink_name": "analyzed_goals",
+          "is_static": true
+        },
+        {
+          "id": "link-019-3",
+          "source_id": "goal-analyzer-019",
+          "sink_id": "nutrition-planner-019",
+          "source_name": "result",
+          "sink_name": "analyzed_goals",
+          "is_static": true
+        }
+      ],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "workout-planner-019",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "workout_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-019-2",
+          "source_id": "goal-analyzer-019",
+          "sink_id": "workout-planner-019",
+          "source_name": "result",
+          "sink_name": "analyzed_goals",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-019-4",
+          "source_id": "workout-planner-019",
+          "sink_id": "progress-tracker-019",
+          "source_name": "result",
+          "sink_name": "workout_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "nutrition-planner-019",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "nutrition_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-019-3",
+          "source_id": "goal-analyzer-019",
+          "sink_id": "nutrition-planner-019",
+          "source_name": "result",
+          "sink_name": "analyzed_goals",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-019-5",
+          "source_id": "nutrition-planner-019",
+          "sink_id": "progress-tracker-019",
+          "source_name": "result",
+          "sink_name": "nutrition_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "progress-tracker-019",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Progress Tracking",
+        "value": "Monitor fitness progress and adjust plans"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-019-4",
+          "source_id": "workout-planner-019",
+          "sink_id": "progress-tracker-019",
+          "source_name": "result",
+          "sink_name": "workout_plan",
+          "is_static": true
+        },
+        {
+          "id": "link-019-5",
+          "source_id": "nutrition-planner-019",
+          "sink_id": "progress-tracker-019",
+          "source_name": "result",
+          "sink_name": "nutrition_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-019-6",
+          "source_id": "progress-tracker-019",
+          "sink_id": "motivation-coach-019",
+          "source_name": "result",
+          "sink_name": "progress_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "motivation-coach-019",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "motivation_coaching"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-019-6",
+          "source_id": "progress-tracker-019",
+          "sink_id": "motivation-coach-019",
+          "source_name": "result",
+          "sink_name": "progress_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-019-7",
+          "source_id": "motivation-coach-019",
+          "sink_id": "report-generator-019",
+          "source_name": "result",
+          "sink_name": "motivation_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-019",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Fitness Report",
+        "value": "Generate comprehensive fitness and nutrition report with disclaimers"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-019-7",
+          "source_id": "motivation-coach-019",
+          "sink_id": "report-generator-019",
+          "source_name": "result",
+          "sink_name": "motivation_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "fitness-nutrition-pro-019",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

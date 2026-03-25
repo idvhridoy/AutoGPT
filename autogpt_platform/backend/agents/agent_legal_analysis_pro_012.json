@@ -1,0 +1,275 @@
+{
+  "id": "legal-analysis-pro-012",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Legal Document Analysis Agent",
+  "description": "Advanced legal analysis agent that reviews contracts, identifies clauses, extracts obligations, and provides legal risk assessments",
+  "instructions": "You are an AI legal assistant with expertise in contract law, legal documentation, and risk assessment. IMPORTANT: You are not a substitute for qualified legal counsel. Always include a disclaimer to consult with a licensed attorney. You will: 1) Analyze legal documents and contracts 2) Identify key clauses, obligations, and rights 3) Flag potential risks and unusual terms 4) Summarize complex legal language 5) Extract important dates, deadlines, and conditions 6) Compare against standard legal templates 7) Suggest areas requiring attorney review. Always maintain confidentiality and attorney-client privilege considerations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "legal-input-012",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Legal Document",
+        "value": "Upload contract, agreement, or legal document for analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-012-1",
+          "source_id": "legal-input-012",
+          "sink_id": "document-parser-012",
+          "source_name": "result",
+          "sink_name": "legal_document",
+          "is_static": true
+        }
+      ],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "document-parser-012",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "legal_document_parsing"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-012-1",
+          "source_id": "legal-input-012",
+          "sink_id": "document-parser-012",
+          "source_name": "result",
+          "sink_name": "legal_document",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-012-2",
+          "source_id": "document-parser-012",
+          "sink_id": "clause-extractor-012",
+          "source_name": "result",
+          "sink_name": "parsed_document",
+          "is_static": true
+        },
+        {
+          "id": "link-012-3",
+          "source_id": "document-parser-012",
+          "sink_id": "obligation-tracker-012",
+          "source_name": "result",
+          "sink_name": "parsed_document",
+          "is_static": true
+        }
+      ],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "clause-extractor-012",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "clause_extraction"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-012-2",
+          "source_id": "document-parser-012",
+          "sink_id": "clause-extractor-012",
+          "source_name": "result",
+          "sink_name": "parsed_document",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-012-4",
+          "source_id": "clause-extractor-012",
+          "sink_id": "risk-assessor-012",
+          "source_name": "result",
+          "sink_name": "identified_clauses",
+          "is_static": true
+        }
+      ],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "obligation-tracker-012",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "obligation_tracking"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-012-3",
+          "source_id": "document-parser-012",
+          "sink_id": "obligation-tracker-012",
+          "source_name": "result",
+          "sink_name": "parsed_document",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-012-5",
+          "source_id": "obligation-tracker-012",
+          "sink_id": "risk-assessor-012",
+          "source_name": "result",
+          "sink_name": "obligations",
+          "is_static": true
+        }
+      ],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "risk-assessor-012",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Risk Assessment",
+        "value": "Assess legal risks and liabilities"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-012-4",
+          "source_id": "clause-extractor-012",
+          "sink_id": "risk-assessor-012",
+          "source_name": "result",
+          "sink_name": "identified_clauses",
+          "is_static": true
+        },
+        {
+          "id": "link-012-5",
+          "source_id": "obligation-tracker-012",
+          "sink_id": "risk-assessor-012",
+          "source_name": "result",
+          "sink_name": "obligations",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-012-6",
+          "source_id": "risk-assessor-012",
+          "sink_id": "compliance-checker-012",
+          "source_name": "result",
+          "sink_name": "risk_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "compliance-checker-012",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "compliance_checking"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-012-6",
+          "source_id": "risk-assessor-012",
+          "sink_id": "compliance-checker-012",
+          "source_name": "result",
+          "sink_name": "risk_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-012-7",
+          "source_id": "compliance-checker-012",
+          "sink_id": "report-generator-012",
+          "source_name": "result",
+          "sink_name": "compliance_status",
+          "is_static": true
+        }
+      ],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-012",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Legal Analysis Report",
+        "value": "Generate comprehensive legal analysis with disclaimers"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-012-7",
+          "source_id": "compliance-checker-012",
+          "sink_id": "report-generator-012",
+          "source_name": "result",
+          "sink_name": "compliance_status",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "legal-analysis-pro-012",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

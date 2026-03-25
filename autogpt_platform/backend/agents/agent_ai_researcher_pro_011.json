@@ -1,0 +1,275 @@
+{
+  "id": "ai-researcher-pro-011",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Research & Paper Analysis Agent",
+  "description": "Advanced research agent that analyzes academic papers, summarizes findings, extracts key insights, and helps with literature reviews",
+  "instructions": "You are an expert research scientist with deep knowledge across multiple disciplines and experience in academic writing. You will: 1) Analyze research papers and extract key findings 2) Summarize complex concepts in understandable language 3) Identify research gaps and future directions 4) Help with literature reviews and bibliographies 5) Suggest related papers and citations 6) Extract methodologies and experimental setups 7) Generate research questions and hypotheses. Always maintain academic integrity and properly cite sources.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "research-input-011",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Research Query",
+        "value": "Upload papers, specify research topic, or ask for analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-011-1",
+          "source_id": "research-input-011",
+          "sink_id": "paper-parser-011",
+          "source_name": "result",
+          "sink_name": "research_query",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "paper-parser-011",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "paper_parsing"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-011-1",
+          "source_id": "research-input-011",
+          "sink_id": "paper-parser-011",
+          "source_name": "result",
+          "sink_name": "research_query",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-011-2",
+          "source_id": "paper-parser-011",
+          "sink_id": "insight-extractor-011",
+          "source_name": "result",
+          "sink_name": "parsed_content",
+          "is_static": true
+        },
+        {
+          "id": "link-011-3",
+          "source_id": "paper-parser-011",
+          "sink_id": "citation-finder-011",
+          "source_name": "result",
+          "sink_name": "parsed_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "insight-extractor-011",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "insight_extraction"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-011-2",
+          "source_id": "paper-parser-011",
+          "sink_id": "insight-extractor-011",
+          "source_name": "result",
+          "sink_name": "parsed_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-011-4",
+          "source_id": "insight-extractor-011",
+          "sink_id": "gap-analyzer-011",
+          "source_name": "result",
+          "sink_name": "key_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "citation-finder-011",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "citation_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-011-3",
+          "source_id": "paper-parser-011",
+          "sink_id": "citation-finder-011",
+          "source_name": "result",
+          "sink_name": "parsed_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-011-5",
+          "source_id": "citation-finder-011",
+          "sink_id": "gap-analyzer-011",
+          "source_name": "result",
+          "sink_name": "citation_network",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "gap-analyzer-011",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Research Gap Analysis",
+        "value": "Identify research gaps and future directions"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-011-4",
+          "source_id": "insight-extractor-011",
+          "sink_id": "gap-analyzer-011",
+          "source_name": "result",
+          "sink_name": "key_insights",
+          "is_static": true
+        },
+        {
+          "id": "link-011-5",
+          "source_id": "citation-finder-011",
+          "sink_id": "gap-analyzer-011",
+          "source_name": "result",
+          "sink_name": "citation_network",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-011-6",
+          "source_id": "gap-analyzer-011",
+          "sink_id": "literature-reviewer-011",
+          "source_name": "result",
+          "sink_name": "research_gaps",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "literature-reviewer-011",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "literature_review"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-011-6",
+          "source_id": "gap-analyzer-011",
+          "sink_id": "literature-reviewer-011",
+          "source_name": "result",
+          "sink_name": "research_gaps",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-011-7",
+          "source_id": "literature-reviewer-011",
+          "sink_id": "report-generator-011",
+          "source_name": "result",
+          "sink_name": "literature_summary",
+          "is_static": true
+        }
+      ],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-011",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Research Report",
+        "value": "Generate comprehensive research analysis report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-011-7",
+          "source_id": "literature-reviewer-011",
+          "sink_id": "report-generator-011",
+          "source_name": "result",
+          "sink_name": "literature_summary",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "ai-researcher-pro-011",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

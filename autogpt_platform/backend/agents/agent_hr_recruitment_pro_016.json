@@ -1,0 +1,275 @@
+{
+  "id": "hr-recruitment-pro-016",
+  "version": 1,
+  "is_active": true,
+  "name": "AI HR & Recruitment Agent",
+  "description": "Comprehensive HR agent that streamlines recruitment, onboarding, employee engagement, and talent management processes",
+  "instructions": "You are an expert HR professional and recruitment specialist with deep knowledge in talent acquisition, employee engagement, performance management, and HR best practices. You will: 1) Analyze job requirements and create ideal candidate profiles 2) Screen resumes and match candidates to positions 3) Generate interview questions and evaluation criteria 4) Assist with onboarding processes and documentation 5) Monitor employee engagement and satisfaction 6) Provide performance review templates and feedback 7) Ensure compliance with HR regulations and policies. Always maintain confidentiality and follow ethical HR practices.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "hr-input-016",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "HR Request",
+        "value": "Specify job opening, upload resumes, or describe HR need"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-016-1",
+          "source_id": "hr-input-016",
+          "sink_id": "job-analyzer-016",
+          "source_name": "result",
+          "sink_name": "hr_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "job-analyzer-016",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "job_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-016-1",
+          "source_id": "hr-input-016",
+          "sink_id": "job-analyzer-016",
+          "source_name": "result",
+          "sink_name": "hr_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-016-2",
+          "source_id": "job-analyzer-016",
+          "sink_id": "resume-screener-016",
+          "source_name": "result",
+          "sink_name": "job_profile",
+          "is_static": true
+        },
+        {
+          "id": "link-016-3",
+          "source_id": "job-analyzer-016",
+          "sink_id": "interview-designer-016",
+          "source_name": "result",
+          "sink_name": "job_profile",
+          "is_static": true
+        }
+      ],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "resume-screener-016",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "resume_screening"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-016-2",
+          "source_id": "job-analyzer-016",
+          "sink_id": "resume-screener-016",
+          "source_name": "result",
+          "sink_name": "job_profile",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-016-4",
+          "source_id": "resume-screener-016",
+          "sink_id": "candidate-matcher-016",
+          "source_name": "result",
+          "sink_name": "screened_candidates",
+          "is_static": true
+        }
+      ],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "interview-designer-016",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "interview_design"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-016-3",
+          "source_id": "job-analyzer-016",
+          "sink_id": "interview-designer-016",
+          "source_name": "result",
+          "sink_name": "job_profile",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-016-5",
+          "source_id": "interview-designer-016",
+          "sink_id": "candidate-matcher-016",
+          "source_name": "result",
+          "sink_name": "interview_kit",
+          "is_static": true
+        }
+      ],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "candidate-matcher-016",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Candidate Matching",
+        "value": "Match candidates to job requirements"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-016-4",
+          "source_id": "resume-screener-016",
+          "sink_id": "candidate-matcher-016",
+          "source_name": "result",
+          "sink_name": "screened_candidates",
+          "is_static": true
+        },
+        {
+          "id": "link-016-5",
+          "source_id": "interview-designer-016",
+          "sink_id": "candidate-matcher-016",
+          "source_name": "result",
+          "sink_name": "interview_kit",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-016-6",
+          "source_id": "candidate-matcher-016",
+          "sink_id": "onboarding-assistant-016",
+          "source_name": "result",
+          "sink_name": "matched_candidates",
+          "is_static": true
+        }
+      ],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "onboarding-assistant-016",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "onboarding_assistance"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-016-6",
+          "source_id": "candidate-matcher-016",
+          "sink_id": "onboarding-assistant-016",
+          "source_name": "result",
+          "sink_name": "matched_candidates",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-016-7",
+          "source_id": "onboarding-assistant-016",
+          "sink_id": "hr-reporter-016",
+          "source_name": "result",
+          "sink_name": "onboarding_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "hr-reporter-016",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "HR Report",
+        "value": "Generate comprehensive recruitment and HR analytics report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-016-7",
+          "source_id": "onboarding-assistant-016",
+          "sink_id": "hr-reporter-016",
+          "source_name": "result",
+          "sink_name": "onboarding_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "hr-recruitment-pro-016",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

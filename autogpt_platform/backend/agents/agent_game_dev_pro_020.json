@@ -1,0 +1,275 @@
+{
+  "id": "game-dev-pro-020",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Game Development Assistant Agent",
+  "description": "Comprehensive game development agent that assists with game design, code generation, asset creation, and optimization",
+  "instructions": "You are an expert game developer with deep knowledge in game design, programming, art integration, and game optimization across multiple platforms. You will: 1) Help design game mechanics and gameplay systems 2) Generate code snippets and game logic 3) Suggest game architectures and design patterns 4) Assist with level design and game balance 5) Provide optimization tips for performance 6) Help with monetization strategies and game economies 7) Review and debug game code. Always consider player experience, performance constraints, and platform requirements in recommendations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "gamedev-input-020",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Game Development Request",
+        "value": "Describe game concept, ask for code help, or specify development need"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-020-1",
+          "source_id": "gamedev-input-020",
+          "sink_id": "design-analyzer-020",
+          "source_name": "result",
+          "sink_name": "gamedev_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "design-analyzer-020",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "game_design_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-020-1",
+          "source_id": "gamedev-input-020",
+          "sink_id": "design-analyzer-020",
+          "source_name": "result",
+          "sink_name": "gamedev_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-020-2",
+          "source_id": "design-analyzer-020",
+          "sink_id": "code-generator-020",
+          "source_name": "result",
+          "sink_name": "game_design",
+          "is_static": true
+        },
+        {
+          "id": "link-020-3",
+          "source_id": "design-analyzer-020",
+          "sink_id": "mechanics-designer-020",
+          "source_name": "result",
+          "sink_name": "game_design",
+          "is_static": true
+        }
+      ],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "code-generator-020",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "code_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-020-2",
+          "source_id": "design-analyzer-020",
+          "sink_id": "code-generator-020",
+          "source_name": "result",
+          "sink_name": "game_design",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-020-4",
+          "source_id": "code-generator-020",
+          "sink_id": "optimization-advisor-020",
+          "source_name": "result",
+          "sink_name": "generated_code",
+          "is_static": true
+        }
+      ],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "mechanics-designer-020",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "game_mechanics_design"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-020-3",
+          "source_id": "design-analyzer-020",
+          "sink_id": "mechanics-designer-020",
+          "source_name": "result",
+          "sink_name": "game_design",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-020-5",
+          "source_id": "mechanics-designer-020",
+          "sink_id": "optimization-advisor-020",
+          "source_name": "result",
+          "sink_name": "game_mechanics",
+          "is_static": true
+        }
+      ],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "optimization-advisor-020",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Game Optimization",
+        "value": "Optimize game performance and player experience"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-020-4",
+          "source_id": "code-generator-020",
+          "sink_id": "optimization-advisor-020",
+          "source_name": "result",
+          "sink_name": "generated_code",
+          "is_static": true
+        },
+        {
+          "id": "link-020-5",
+          "source_id": "mechanics-designer-020",
+          "sink_id": "optimization-advisor-020",
+          "source_name": "result",
+          "sink_name": "game_mechanics",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-020-6",
+          "source_id": "optimization-advisor-020",
+          "sink_id": "platform-adapter-020",
+          "source_name": "result",
+          "sink_name": "optimized_game",
+          "is_static": true
+        }
+      ],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "platform-adapter-020",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "platform_adaptation"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-020-6",
+          "source_id": "optimization-advisor-020",
+          "sink_id": "platform-adapter-020",
+          "source_name": "result",
+          "sink_name": "optimized_game",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-020-7",
+          "source_id": "platform-adapter-020",
+          "sink_id": "report-generator-020",
+          "source_name": "result",
+          "sink_name": "adapted_game",
+          "is_static": true
+        }
+      ],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-020",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Game Development Report",
+        "value": "Generate comprehensive game development summary"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-020-7",
+          "source_id": "platform-adapter-020",
+          "sink_id": "report-generator-020",
+          "source_name": "result",
+          "sink_name": "adapted_game",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "game-dev-pro-020",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

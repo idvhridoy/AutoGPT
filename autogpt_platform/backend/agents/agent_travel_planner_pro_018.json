@@ -1,0 +1,275 @@
+{
+  "id": "travel-planner-pro-018",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Travel Planning Agent",
+  "description": "Comprehensive travel agent that plans itineraries, finds best deals, recommends destinations, and manages travel logistics",
+  "instructions": "You are an expert travel consultant with deep knowledge in destinations, travel planning, booking systems, and travel optimization. You will: 1) Create personalized travel itineraries based on preferences and budget 2) Find the best flights, hotels, and transportation options 3) Recommend attractions, restaurants, and activities 4) Provide weather forecasts and packing suggestions 5) Calculate total trip costs and find savings opportunities 6) Generate day-by-day schedules with optimal routing 7. Share travel tips and local insights. Always consider safety, budget constraints, and traveler preferences in recommendations.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "travel-input-018",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Travel Request",
+        "value": "Enter destination, dates, budget, and travel preferences"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-018-1",
+          "source_id": "travel-input-018",
+          "sink_id": "preference-analyzer-018",
+          "source_name": "result",
+          "sink_name": "travel_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "preference-analyzer-018",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "preference_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-018-1",
+          "source_id": "travel-input-018",
+          "sink_id": "preference-analyzer-018",
+          "source_name": "result",
+          "sink_name": "travel_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-018-2",
+          "source_id": "preference-analyzer-018",
+          "sink_id": "itinerary-builder-018",
+          "source_name": "result",
+          "sink_name": "traveler_profile",
+          "is_static": true
+        },
+        {
+          "id": "link-018-3",
+          "source_id": "preference-analyzer-018",
+          "sink_id": "deal-finder-018",
+          "source_name": "result",
+          "sink_name": "traveler_profile",
+          "is_static": true
+        }
+      ],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "itinerary-builder-018",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "itinerary_building"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-018-2",
+          "source_id": "preference-analyzer-018",
+          "sink_id": "itinerary-builder-018",
+          "source_name": "result",
+          "sink_name": "traveler_profile",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-018-4",
+          "source_id": "itinerary-builder-018",
+          "sink_id": "budget-optimizer-018",
+          "source_name": "result",
+          "sink_name": "draft_itinerary",
+          "is_static": true
+        }
+      ],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "deal-finder-018",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "deal_finding"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-018-3",
+          "source_id": "preference-analyzer-018",
+          "sink_id": "deal-finder-018",
+          "source_name": "result",
+          "sink_name": "traveler_profile",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-018-5",
+          "source_id": "deal-finder-018",
+          "sink_id": "budget-optimizer-018",
+          "source_name": "result",
+          "sink_name": "travel_deals",
+          "is_static": true
+        }
+      ],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "budget-optimizer-018",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Budget Optimization",
+        "value": "Optimize travel costs within budget constraints"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-018-4",
+          "source_id": "itinerary-builder-018",
+          "sink_id": "budget-optimizer-018",
+          "source_name": "result",
+          "sink_name": "draft_itinerary",
+          "is_static": true
+        },
+        {
+          "id": "link-018-5",
+          "source_id": "deal-finder-018",
+          "sink_id": "budget-optimizer-018",
+          "source_name": "result",
+          "sink_name": "travel_deals",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-018-6",
+          "source_id": "budget-optimizer-018",
+          "sink_id": "local-guide-018",
+          "source_name": "result",
+          "sink_name": "optimized_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "local-guide-018",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "local_guidance"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-018-6",
+          "source_id": "budget-optimizer-018",
+          "sink_id": "local-guide-018",
+          "source_name": "result",
+          "sink_name": "optimized_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-018-7",
+          "source_id": "local-guide-018",
+          "sink_id": "report-generator-018",
+          "source_name": "result",
+          "sink_name": "local_insights",
+          "is_static": true
+        }
+      ],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-018",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Travel Package",
+        "value": "Generate complete travel package with all details"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-018-7",
+          "source_id": "local-guide-018",
+          "sink_id": "report-generator-018",
+          "source_name": "result",
+          "sink_name": "local_insights",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "travel-planner-pro-018",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

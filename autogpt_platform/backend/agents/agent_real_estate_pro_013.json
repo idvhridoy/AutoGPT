@@ -1,0 +1,275 @@
+{
+  "id": "real-estate-pro-013",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Real Estate Investment Analysis Agent",
+  "description": "Comprehensive real estate analysis agent that evaluates properties, calculates ROI, analyzes market trends, and provides investment recommendations",
+  "instructions": "You are an expert real estate analyst and investment advisor with deep knowledge in property valuation, market analysis, and investment strategies. You will: 1) Analyze property details and location factors 2) Calculate investment metrics (ROI, cap rate, cash flow) 3) Assess market trends and appreciation potential 4) Evaluate rental income and vacancy rates 5) Analyze comparable properties and market comps 6) Identify potential risks and opportunities 7) Provide investment recommendations with risk assessments. Always emphasize that real estate investments carry risks and due diligence is essential.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "property-input-013",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Property Details",
+        "value": "Enter property address, price, specs, or upload property data"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-013-1",
+          "source_id": "property-input-013",
+          "sink_id": "property-analyzer-013",
+          "source_name": "result",
+          "sink_name": "property_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "property-analyzer-013",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "property_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-013-1",
+          "source_id": "property-input-013",
+          "sink_id": "property-analyzer-013",
+          "source_name": "result",
+          "sink_name": "property_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-013-2",
+          "source_id": "property-analyzer-013",
+          "sink_id": "market-analyzer-013",
+          "source_name": "result",
+          "sink_name": "property_specs",
+          "is_static": true
+        },
+        {
+          "id": "link-013-3",
+          "source_id": "property-analyzer-013",
+          "sink_id": "roi-calculator-013",
+          "source_name": "result",
+          "sink_name": "property_specs",
+          "is_static": true
+        }
+      ],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "market-analyzer-013",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "market_analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-013-2",
+          "source_id": "property-analyzer-013",
+          "sink_id": "market-analyzer-013",
+          "source_name": "result",
+          "sink_name": "property_specs",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-013-4",
+          "source_id": "market-analyzer-013",
+          "sink_id": "investment-advisor-013",
+          "source_name": "result",
+          "sink_name": "market_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "roi-calculator-013",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "roi_calculation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-013-3",
+          "source_id": "property-analyzer-013",
+          "sink_id": "roi-calculator-013",
+          "source_name": "result",
+          "sink_name": "property_specs",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-013-5",
+          "source_id": "roi-calculator-013",
+          "sink_id": "investment-advisor-013",
+          "source_name": "result",
+          "sink_name": "financial_metrics",
+          "is_static": true
+        }
+      ],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "investment-advisor-013",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Investment Advisory",
+        "value": "Provide investment recommendations and risk analysis"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-013-4",
+          "source_id": "market-analyzer-013",
+          "sink_id": "investment-advisor-013",
+          "source_name": "result",
+          "sink_name": "market_data",
+          "is_static": true
+        },
+        {
+          "id": "link-013-5",
+          "source_id": "roi-calculator-013",
+          "sink_id": "investment-advisor-013",
+          "source_name": "result",
+          "sink_name": "financial_metrics",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-013-6",
+          "source_id": "investment-advisor-013",
+          "sink_id": "risk-assessor-013",
+          "source_name": "result",
+          "sink_name": "investment_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "risk-assessor-013",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "risk_assessment"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-013-6",
+          "source_id": "investment-advisor-013",
+          "sink_id": "risk-assessor-013",
+          "source_name": "result",
+          "sink_name": "investment_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-013-7",
+          "source_id": "risk-assessor-013",
+          "sink_id": "report-generator-013",
+          "source_name": "result",
+          "sink_name": "risk_analysis",
+          "is_static": true
+        }
+      ],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-013",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Investment Report",
+        "value": "Generate comprehensive real estate investment report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-013-7",
+          "source_id": "risk-assessor-013",
+          "sink_id": "report-generator-013",
+          "source_name": "result",
+          "sink_name": "risk_analysis",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "real-estate-pro-013",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

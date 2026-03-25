@@ -1,0 +1,275 @@
+{
+  "id": "social-media-pro-014",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Social Media Management Agent",
+  "description": "Comprehensive social media agent that creates content, schedules posts, analyzes engagement, and optimizes social media strategy across platforms",
+  "instructions": "You are an expert social media manager with deep knowledge in content creation, platform optimization, audience engagement, and social media analytics. You will: 1) Create engaging content tailored for each platform 2) Optimize posting schedules based on audience activity 3) Analyze engagement metrics and performance 4) Suggest hashtag strategies and content themes 5) Monitor brand mentions and sentiment 6) Generate platform-specific content variations 7) Provide growth strategies and engagement tactics. Always adapt content to platform best practices and audience preferences.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "social-input-014",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Social Media Request",
+        "value": "Specify brand, platforms, content goals, or upload media"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-014-1",
+          "source_id": "social-input-014",
+          "sink_id": "content-planner-014",
+          "source_name": "result",
+          "sink_name": "social_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "content-planner-014",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "content_planning"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-014-1",
+          "source_id": "social-input-014",
+          "sink_id": "content-planner-014",
+          "source_name": "result",
+          "sink_name": "social_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-014-2",
+          "source_id": "content-planner-014",
+          "sink_id": "content-creator-014",
+          "source_name": "result",
+          "sink_name": "content_plan",
+          "is_static": true
+        },
+        {
+          "id": "link-014-3",
+          "source_id": "content-planner-014",
+          "sink_id": "scheduler-014",
+          "source_name": "result",
+          "sink_name": "content_plan",
+          "is_static": true
+        }
+      ],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "content-creator-014",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "content_creation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-014-2",
+          "source_id": "content-planner-014",
+          "sink_id": "content-creator-014",
+          "source_name": "result",
+          "sink_name": "content_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-014-4",
+          "source_id": "content-creator-014",
+          "sink_id": "engagement-optimizer-014",
+          "source_name": "result",
+          "sink_name": "created_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "scheduler-014",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "posting_schedule"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-014-3",
+          "source_id": "content-planner-014",
+          "sink_id": "scheduler-014",
+          "source_name": "result",
+          "sink_name": "content_plan",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-014-5",
+          "source_id": "scheduler-014",
+          "sink_id": "engagement-optimizer-014",
+          "source_name": "result",
+          "sink_name": "posting_schedule",
+          "is_static": true
+        }
+      ],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "engagement-optimizer-014",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Engagement Optimization",
+        "value": "Optimize content for maximum engagement"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-014-4",
+          "source_id": "content-creator-014",
+          "sink_id": "engagement-optimizer-014",
+          "source_name": "result",
+          "sink_name": "created_content",
+          "is_static": true
+        },
+        {
+          "id": "link-014-5",
+          "source_id": "scheduler-014",
+          "sink_id": "engagement-optimizer-014",
+          "source_name": "result",
+          "sink_name": "posting_schedule",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-014-6",
+          "source_id": "engagement-optimizer-014",
+          "sink_id": "analytics-tracker-014",
+          "source_name": "result",
+          "sink_name": "optimized_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "analytics-tracker-014",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "analytics_tracking"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-014-6",
+          "source_id": "engagement-optimizer-014",
+          "sink_id": "analytics-tracker-014",
+          "source_name": "result",
+          "sink_name": "optimized_content",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-014-7",
+          "source_id": "analytics-tracker-014",
+          "sink_id": "report-generator-014",
+          "source_name": "result",
+          "sink_name": "performance_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-014",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Social Media Report",
+        "value": "Generate comprehensive social media performance report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-014-7",
+          "source_id": "analytics-tracker-014",
+          "sink_id": "report-generator-014",
+          "source_name": "result",
+          "sink_name": "performance_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "social-media-pro-014",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "id": "education-tutor-pro-017",
+  "version": 1,
+  "is_active": true,
+  "name": "AI Educational Tutor & Learning Assistant",
+  "description": "Advanced educational agent that provides personalized tutoring, creates learning plans, explains complex topics, and tracks student progress",
+  "instructions": "You are an expert educator and tutor with deep knowledge across multiple subjects and experience in personalized learning. You will: 1) Assess student knowledge and learning style 2) Create personalized learning plans and schedules 3) Explain complex concepts in simple, understandable ways 4) Generate practice problems and quizzes 5) Provide step-by-step problem solving guidance 6) Track progress and adapt teaching methods 7) Recommend additional resources and study materials. Always be patient, encouraging, and adapt to each student's pace and learning style.",
+  "recommended_schedule_cron": null,
+  "nodes": [
+    {
+      "id": "education-input-017",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Learning Request",
+        "value": "Specify subject, topic, learning goal, or ask for help with homework"
+      },
+      "metadata": {
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "input_links": [],
+      "output_links": [
+        {
+          "id": "link-017-1",
+          "source_id": "education-input-017",
+          "sink_id": "learning-assessor-017",
+          "source_name": "result",
+          "sink_name": "learning_request",
+          "is_static": true
+        }
+      ],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "learning-assessor-017",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "learning_assessment"
+      },
+      "metadata": {
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-017-1",
+          "source_id": "education-input-017",
+          "sink_id": "learning-assessor-017",
+          "source_name": "result",
+          "sink_name": "learning_request",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-017-2",
+          "source_id": "learning-assessor-017",
+          "sink_id": "content-explainer-017",
+          "source_name": "result",
+          "sink_name": "student_profile",
+          "is_static": true
+        },
+        {
+          "id": "link-017-3",
+          "source_id": "learning-assessor-017",
+          "sink_id": "practice-generator-017",
+          "source_name": "result",
+          "sink_name": "student_profile",
+          "is_static": true
+        }
+      ],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "content-explainer-017",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "content_explanation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 50
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-017-2",
+          "source_id": "learning-assessor-017",
+          "sink_id": "content-explainer-017",
+          "source_name": "result",
+          "sink_name": "student_profile",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-017-4",
+          "source_id": "content-explainer-017",
+          "sink_id": "progress-tracker-017",
+          "source_name": "result",
+          "sink_name": "explained_content",
+          "is_static": true
+        }
+      ],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "practice-generator-017",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "practice_generation"
+      },
+      "metadata": {
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-017-3",
+          "source_id": "learning-assessor-017",
+          "sink_id": "practice-generator-017",
+          "source_name": "result",
+          "sink_name": "student_profile",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-017-5",
+          "source_id": "practice-generator-017",
+          "sink_id": "progress-tracker-017",
+          "source_name": "result",
+          "sink_name": "practice_exercises",
+          "is_static": true
+        }
+      ],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "progress-tracker-017",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Progress Tracking",
+        "value": "Monitor student progress and adapt learning approach"
+      },
+      "metadata": {
+        "position": {
+          "x": 1000,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-017-4",
+          "source_id": "content-explainer-017",
+          "sink_id": "progress-tracker-017",
+          "source_name": "result",
+          "sink_name": "explained_content",
+          "is_static": true
+        },
+        {
+          "id": "link-017-5",
+          "source_id": "practice-generator-017",
+          "sink_id": "progress-tracker-017",
+          "source_name": "result",
+          "sink_name": "practice_exercises",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-017-6",
+          "source_id": "progress-tracker-017",
+          "sink_id": "learning-advisor-017",
+          "source_name": "result",
+          "sink_name": "progress_data",
+          "is_static": true
+        }
+      ],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "learning-advisor-017",
+      "block_id": "3146e4fe-2cdd-4f29-bd12-0c9d5bb4deb0",
+      "input_default": {
+        "group": 1,
+        "pattern": "learning_advisory"
+      },
+      "metadata": {
+        "position": {
+          "x": 1300,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-017-6",
+          "source_id": "progress-tracker-017",
+          "sink_id": "learning-advisor-017",
+          "source_name": "result",
+          "sink_name": "progress_data",
+          "is_static": true
+        }
+      ],
+      "output_links": [
+        {
+          "id": "link-017-7",
+          "source_id": "learning-advisor-017",
+          "sink_id": "report-generator-017",
+          "source_name": "result",
+          "sink_name": "learning_recommendations",
+          "is_static": true
+        }
+      ],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    },
+    {
+      "id": "report-generator-017",
+      "block_id": "c0a8e994-ebf1-4a9c-a4d8-89d09c86741b",
+      "input_default": {
+        "name": "Learning Report",
+        "value": "Generate comprehensive learning progress report"
+      },
+      "metadata": {
+        "position": {
+          "x": 1600,
+          "y": 125
+        }
+      },
+      "input_links": [
+        {
+          "id": "link-017-7",
+          "source_id": "learning-advisor-017",
+          "sink_id": "report-generator-017",
+          "source_name": "result",
+          "sink_name": "learning_recommendations",
+          "is_static": true
+        }
+      ],
+      "output_links": [],
+      "graph_id": "education-tutor-pro-017",
+      "graph_version": 1,
+      "webhook_id": null,
+      "webhook": null
+    }
+  ]
+}
